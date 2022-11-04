@@ -3,6 +3,20 @@ import React, { useState } from "react";
 export const ApplyLoan = (props) => {
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
+  const [itemCategory, setItemCategory] = useState("Crockery");
+  const [itemMake, setItemMake] = useState("Ceramic");
+  const onApplyLoanSubmitHandler = (e) =>{
+    e.preventDefault();
+    let applyFormData = {
+      employeeId: props.authorizedLogin,
+      itemValue: itemValue,
+      itemCategory: itemCategory,
+      itemMake: itemMake,
+      itemDescription: itemDescription
+    }
+
+    console.log(applyFormData);
+  }
 
   return (
     <div>
@@ -13,7 +27,7 @@ export const ApplyLoan = (props) => {
       <div className="outer">
         <div className="card w-45">
           <div className="card-body">
-            <form>
+            <form onSubmit={onApplyLoanSubmitHandler}>
               <div className="mb-3">
                 <label htmlFor="ememployeeId" className="form-label">
                   Employee Id
@@ -32,12 +46,15 @@ export const ApplyLoan = (props) => {
                   Item Category
                 </label>
                 <select
-                  class="form-select form-select-sm"
+                  className="form-select form-select-sm"
                   aria-label=".form-select-lg example"
                   name="itemCategory"
-                  for="itemCategory"
+                  value={itemCategory}
+                  htmlFor="itemCategory"
+                  onChange={(e) => setItemCategory(e.target.value)}
+                  required
                 >
-                  <option selected>Select Item Category</option>
+                  
                   <option value="Crockery">Crockery</option>
                   <option value="Furniture">Furniture</option>
                   <option value="Stationary">Stationary</option>
@@ -54,7 +71,9 @@ export const ApplyLoan = (props) => {
                   name="itemDescription"
                   value={itemDescription}
                   onChange={(e) => setItemDescription(e.target.value)}
+                  onBlur={(e) => setItemDescription(e.target.value.trim())}
                   placeholder="Enter Item Description"
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -69,6 +88,7 @@ export const ApplyLoan = (props) => {
                   value={itemValue}
                   onChange={(e) => setItemValue(e.target.value)}
                   placeholder="Enter Item Value"
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -76,16 +96,18 @@ export const ApplyLoan = (props) => {
                   Item Make
                 </label>
                 <select
-                  class="form-select form-select-sm"
+                  className="form-select form-select-sm"
                   aria-label=".form-select-lg example"
+                  value={itemMake}
                   name="itemMake"
-                  for="itemMake"
+                  htmlFor="itemMake"
+                  onChange={(e) => setItemMake(e.target.value)}
+                  required
                 >
-                  <option selected>Select Item Make</option>
-                  <option value="Wooden">Wooden</option>
-                  <option value="Glass">Glass</option>
                   <option value="Ceramic">Ceramic</option>
+                  <option value="Glass">Glass</option>
                   <option value="Plastic">Plastic</option>
+                  <option value="Wooden">Wooden</option>
                 </select>
               </div>
 
