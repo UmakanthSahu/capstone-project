@@ -27,7 +27,6 @@ export const Login = (props) => {
             props.setAuthorizedLogin(username);
             props.navigate("/dashboard");
           } else {
-            props.setTitle(data.description);
             props.navigate("/invalidCredentials");
           }
         })
@@ -57,7 +56,7 @@ export const Login = (props) => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 onBlur={(e) => setUsername(e.target.value.trim())}
-                placeholder="Enter your Email Address"
+                placeholder="Enter your Employee Id"
               />
             </div>
             <div className="mb-3">

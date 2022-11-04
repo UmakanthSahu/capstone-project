@@ -16,7 +16,7 @@ export const Dashboard = (props) => {
         <h2>Loan Management Application</h2>
         <h3>User Dashboard</h3>
 
-        <div>
+        <div className="container my-5">
           <Link to="/viewLoans" className="m-2">
             <button className="btn btn-primary">View Loans</button>
           </Link>
@@ -29,6 +29,11 @@ export const Dashboard = (props) => {
             <button className="btn btn-primary">
               View Items Purchased
             </button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/logoutSuccess" className="m-2">
+            <button className="btn btn-danger">Logout</button>
           </Link>
         </div>
       </div>
