@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import capstone.batch3.loan.user.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserLoginService {
 
 	@Autowired
 	UserRepository userRepository;
