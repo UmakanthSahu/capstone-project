@@ -1,22 +1,28 @@
 import React, { useState } from "react";
+import { APPLY_LOAN_URL, getJsonPostRequestData } from "../../Services/ApiService";
 
 export const ApplyLoan = (props) => {
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
   const [itemCategory, setItemCategory] = useState("Crockery");
   const [itemMake, setItemMake] = useState("Ceramic");
-  const onApplyLoanSubmitHandler = (e) =>{
+  const onApplyLoanSubmitHandler = (e) => {
     e.preventDefault();
-    let applyFormData = {
+    let applyLoanFormData = {
       employeeId: props.authorizedLogin,
       itemValue: itemValue,
       itemCategory: itemCategory,
       itemMake: itemMake,
-      itemDescription: itemDescription
-    }
+      itemDescription: itemDescription,
+    };
 
-    console.log(applyFormData);
-  }
+    console.log(applyLoanFormData);
+
+    fetch(APPLY_LOAN_URL, getJsonPostRequestData(applyLoanFormData))
+    .then((resp) => {
+      console.log(resp);
+    });
+  };
 
   return (
     <div>
@@ -54,7 +60,6 @@ export const ApplyLoan = (props) => {
                   onChange={(e) => setItemCategory(e.target.value)}
                   required
                 >
-                  
                   <option value="Crockery">Crockery</option>
                   <option value="Furniture">Furniture</option>
                   <option value="Stationary">Stationary</option>
