@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { APPLY_LOAN_URL, getJsonPostRequestData } from "../../Services/ApiService";
 
 export const ApplyLoan = (props) => {
@@ -6,6 +6,8 @@ export const ApplyLoan = (props) => {
   const [itemValue, setItemValue] = useState(0);
   const [itemCategory, setItemCategory] = useState("Crockery");
   const [itemMake, setItemMake] = useState("Ceramic");
+
+
   const onApplyLoanSubmitHandler = (e) => {
     e.preventDefault();
     let applyLoanFormData = {

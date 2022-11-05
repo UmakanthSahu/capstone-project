@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export const ItemsPurchased = () => {
+export const ItemsPurchased = (props) => {
+
+
   return (
     <div>
       <div className="container my-3">

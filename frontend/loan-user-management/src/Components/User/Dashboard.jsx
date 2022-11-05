@@ -2,13 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Dashboard = (props) => {
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    // if (props.authorizedLogin === "") {
-    //   navigate("/login");
-    // }
-  });
 
   return (
     <div>

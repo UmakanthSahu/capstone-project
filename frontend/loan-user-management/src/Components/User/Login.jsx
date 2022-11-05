@@ -24,6 +24,7 @@ export const Login = (props) => {
           if (resp.status === 200) {
             props.setAuthorizedLogin(username);
             props.navigate("/dashboard");
+            console.log("Login Success");
           } else {
             window.alert("Invalid Credentials")
             props.navigate("/login");

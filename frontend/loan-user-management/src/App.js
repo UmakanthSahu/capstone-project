@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { Navbar } from "./Components/Common/Navbar";
 import { Home } from "./Components/Common/Home";
 import { Login } from "./Components/User/Login";
@@ -12,7 +12,7 @@ import { LogoutSuccess } from "./Components/User/LogoutSuccess";
 
 function App() {
   const authorizedLoginFromLocalStorage =
-    localStorage.getItem("authorizedLogin");
+    sessionStorage.getItem("authorizedLogin");
     
   // when user is logged in, this state contains the employeeId
   const [authorizedLogin, setAuthorizedLogin] = useState(
@@ -22,11 +22,15 @@ function App() {
   );
   const navigate = useNavigate();
 
+  function isUserLoggedIn() {
+   return authorizedLogin !== "";
+  }
+
   useEffect(() => {
     // console.log(authorizedLoginFromLocalStorage);
-    localStorage.setItem("authorizedLogin", authorizedLogin);
+    sessionStorage.setItem("authorizedLogin", authorizedLogin);
 
-    return () => localStorage.removeItem("authorizedLogin");
+    return () => sessionStorage.removeItem("authorizedLogin");
   }, [authorizedLogin]);
 
   // handles logout by clearing authorizedLogin
@@ -37,6 +41,8 @@ function App() {
       navigate("/logoutSuccess");
     }
   };
+
+
 
   return (
     <div className="App">
@@ -58,17 +64,19 @@ function App() {
             exact
             path="/dashboard"
             element={
+              isUserLoggedIn() ?
               <Dashboard
                 authorizedLogin={authorizedLogin}
                 setAuthorizedLogin={setAuthorizedLogin}
                 logoutHandler={logoutHandler}
                 navigate={navigate}
-              />
+                
+              /> : <Navigate to="/login" />
             }
           />
-          <Route exact path="/applyLoan" element={<ApplyLoan authorizedLogin = {authorizedLogin}/>} />
-          <Route exact path="/viewLoans" element={<ViewLoans authorizedLogin = {authorizedLogin}/>} />
-          <Route exact path="/itemsPurchased" element={<ItemsPurchased authorizedLogin = {authorizedLogin}/>} />
+          <Route exact path="/applyLoan" element={ isUserLoggedIn() ? <ApplyLoan authorizedLogin = {authorizedLogin}  />: <Navigate to="/login" /> } />
+          <Route exact path="/viewLoans" element={isUserLoggedIn() ?<ViewLoans authorizedLogin = {authorizedLogin} /> : <Navigate to="/login"/>} />
+          <Route exact path="/itemsPurchased" element={isUserLoggedIn() ? <ItemsPurchased authorizedLogin = {authorizedLogin}/> : <Navigate to="/login" />} />
           
           <Route exact path="/logoutSuccess" element={<LogoutSuccess setAuthorizedLogin={setAuthorizedLogin}/>}/>
           <Route exact path="/" element={<Home />} />

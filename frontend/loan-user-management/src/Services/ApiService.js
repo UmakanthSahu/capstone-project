@@ -12,5 +12,5 @@ export const getJsonPostRequestData = (data) => {
 };
 
 export const getLoginUrl = (username, password) => {
-  return BASE_API_URL + username + "/" + password;
+  return BASE_API_URL +"loginUser/"+ username + "/" + password;
 };
