@@ -1,7 +1,7 @@
 const BASE_API_URL = "http://localhost:8080/api/";
-export const LOGIN_URL = BASE_API_URL + "/loginEmployee";
+export const APPLY_LOAN_URL = BASE_API_URL + "applyLoan";
 
-export const getJSONRequestData = (data) => {
+export const getJsonPostRequestData = (data) => {
   return {
     method: "POST",
     headers: {
@@ -9,4 +9,8 @@ export const getJSONRequestData = (data) => {
     },
     body: JSON.stringify(data),
   };
+};
+
+export const getLoginUrl = (username, password) => {
+  return BASE_API_URL + username + "/" + password;
 };

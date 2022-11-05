@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import {LOGIN_URL, getJSONRequestData} from "../../Services/ApiService";
+import { getLoginUrl} from "../../Services/ApiService";
 import { isValidPasswordLength } from "../../Services/FormValidation";
-
-
 
 export const Login = (props) => {
   const [username, setUsername] = useState("");
@@ -18,16 +15,18 @@ export const Login = (props) => {
         employeeId: username,
         password: password,
       };
+      console.log(employeeLoginData);
       
       //connecting with backend
-      fetch(LOGIN_URL, getJSONRequestData(employeeLoginData))
+      fetch(getLoginUrl(username, password))
         .then(async (resp) => {
           const data = await resp.json();
           if (resp.status === 200) {
             props.setAuthorizedLogin(username);
             props.navigate("/dashboard");
           } else {
-            props.navigate("/invalidCredentials");
+            window.alert("Invalid Credentials")
+            props.navigate("/login");
           }
         })
         .catch((err) => {
@@ -57,6 +56,7 @@ export const Login = (props) => {
                 onChange={(e) => setUsername(e.target.value)}
                 onBlur={(e) => setUsername(e.target.value.trim())}
                 placeholder="Enter your Employee Id"
+                required
               />
             </div>
             <div className="mb-3">
@@ -71,6 +71,7 @@ export const Login = (props) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your Password"
+                required
               />
               <div id="passwordHelpBlock" className="form-text">
                 Your password must be atleast 8 characters long.
