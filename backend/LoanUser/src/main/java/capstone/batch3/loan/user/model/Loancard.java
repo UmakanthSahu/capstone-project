@@ -1,13 +1,9 @@
 package capstone.batch3.loan.user.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
 import java.util.List;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 
 import capstone.batch3.loan.user.model.Employee;
 
@@ -21,7 +17,7 @@ public class Loancard {
 	@Column(name="loan_val")
 	private double loan_val;
 	
-	
+	@OneToMany
 	private List<ItemMaster> items;
 	
 	@Column
@@ -30,6 +26,8 @@ public class Loancard {
 	@Column
 	private String type;
 	
+	@OneToOne // can have one loan details at a time
+	@JoinColumn(name = "employee_id")
 	private Employee connect_emp;
 
 	public Employee getConnect_emp() {

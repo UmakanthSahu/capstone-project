@@ -3,18 +3,26 @@ package capstone.batch3.loan.user.model;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import capstone.batch3.loan.user.model.Employee;
 import capstone.batch3.loan.user.model.Loancard;
 
+@Entity
 public class EmpCardDetails {
 	
-	@Column(name="loan_id")
+	@Id
+	private long empcardId;
+	@OneToOne // can have one loan details at a time
+	@JoinColumn(name = "loan_id")
 	private Loancard loancard;
 	
-	
-	@Column(name="employee_id")
+	@OneToOne // can have one loan details at a time
+	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
 	

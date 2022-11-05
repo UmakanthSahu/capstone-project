@@ -21,6 +21,7 @@ public class Employee {
 			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Invalid Email Address")
 	private String emailId;
 
+	
 	@Column(nullable = false, length = 50)
 	private String password;
 

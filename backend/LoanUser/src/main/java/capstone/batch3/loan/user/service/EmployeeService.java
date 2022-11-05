@@ -20,7 +20,7 @@ public class EmployeeService {
 	private static EmployeeRepository employeeRepository;
 
 	public static Employee login(String email,String password) {
-		Employee cus = employeeRepository.findByEmail(email);
+		Employee cus = employeeRepository.findByEmailId(email);
 		System.err.println(cus);
 		if(cus == null) {
 			throw new GlobalLoanException("404", "No customer with this credential");
