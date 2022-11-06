@@ -2,7 +2,8 @@ package capstone.batch3.loan.user.pojo;
 
 public class LoginPOJO {
 	private String email;
-	
+	private String password;
+
 	public String getEmail() {
 		return email;
 	}
@@ -19,9 +20,4 @@ public class LoginPOJO {
 		this.password = password;
 	}
 
-
-	private String password;
-	
-	
-	
 }

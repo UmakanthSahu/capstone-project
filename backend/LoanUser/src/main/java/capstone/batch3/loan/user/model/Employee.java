@@ -7,21 +7,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-
-
 @Entity
 @Table(name = "employee_master")
 public class Employee {
 	@Id
 	@Column(name = "employee_id", nullable = false)
 	private long employeeId;
+	
 	@Column(name = "email_id", length = 30, nullable = false)
 	@NotBlank
 	@Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
 			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Invalid Email Address")
 	private String emailId;
 
-	
 	@Column(nullable = false, length = 50)
 	private String password;
 
@@ -37,8 +35,7 @@ public class Employee {
 	@Pattern(regexp = "^[0-9+-]{8,15}", message = "Phone number must not be less than 8 or greater than 16 digits")
 	private String phoneNumber;
 
-	public Employee(String name, String emailId, String password,
-			String phoneNumber) {
+	public Employee(String name, String emailId, String password, String phoneNumber) {
 		this.emailId = emailId.trim();
 		this.password = password;
 		this.name = name.trim();
@@ -86,5 +83,3 @@ public class Employee {
 	}
 
 }
-	
-

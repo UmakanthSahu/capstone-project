@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getLoginUrl} from "../../Services/ApiService";
+import { getJsonPostRequestData, getLoginUrl, getRequestHeaders} from "../../Services/ApiService";
 import { isValidPasswordLength } from "../../Services/FormValidation";
 
 export const Login = (props) => {
@@ -15,14 +15,15 @@ export const Login = (props) => {
         employeeId: username,
         password: password,
       };
-      console.log(employeeLoginData);
+      // console.log(employeeLoginData, getLoginUrl(username, password));
       
       //connecting with backend
-      fetch(getLoginUrl(username, password))
+      fetch(getLoginUrl(username, password), getRequestHeaders())
         .then(async (resp) => {
+          console.log(resp);
           const data = await resp.json();
           if (resp.status === 200) {
-            props.setAuthorizedLogin(username);
+            props.setAuthorizedLogin(data.employeeId);
             props.navigate("/dashboard");
           } else {
             window.alert("Invalid Credentials")
@@ -45,7 +46,7 @@ export const Login = (props) => {
           <form onSubmit={onSubmitLoginHandler}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
-                Employee Id
+                Username
               </label>
               <input
                 type="text"
@@ -55,7 +56,7 @@ export const Login = (props) => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 onBlur={(e) => setUsername(e.target.value.trim())}
-                placeholder="Enter your Employee Id"
+                placeholder="Enter your username"
                 required
               />
             </div>

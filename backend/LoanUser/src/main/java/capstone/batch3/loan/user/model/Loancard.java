@@ -1,31 +1,34 @@
 package capstone.batch3.loan.user.model;
 
-
 import java.util.List;
 
-import javax.persistence.*;
-
-import capstone.batch3.loan.user.model.Employee;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "loan_table")
 public class Loancard {
 	@Id
-	@Column(name="loan_id",nullable=false)
+	@Column(name = "loan_id", nullable = false)
 	private long loan_id;
-	
-	@Column(name="loan_val")
+
+	@Column(name = "loan_val")
 	private double loan_val;
-	
+
 	@OneToMany
 	private List<ItemMaster> items;
-	
+
 	@Column
 	private int long_duration;
-	
+
 	@Column
 	private String type;
-	
+
 	@OneToOne // can have one loan details at a time
 	@JoinColumn(name = "employee_id")
 	private Employee connect_emp;
@@ -70,6 +73,4 @@ public class Loancard {
 		this.items.add(items);
 	}
 
-	
-	
 }

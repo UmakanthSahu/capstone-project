@@ -1,20 +1,11 @@
 package capstone.batch3.loan.user.pojo;
 
-
-
-import org.springframework.util.MultiValueMap;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
 
 public class ResponseHeader {
 	MultiValueMap<String, String> headers = new HttpHeaders();
-	
+
 	// exposing a custom header for error handling.
 	public ResponseHeader() {
 		headers.add("Access-Control-Expose-Headers", "success");
@@ -27,8 +18,8 @@ public class ResponseHeader {
 	public void setHeaders(MultiValueMap<String, String> headers) {
 		this.headers = headers;
 	}
-	
-	public MultiValueMap<String,String> putOnMap(String key, String value) {
+
+	public MultiValueMap<String, String> putOnMap(String key, String value) {
 		headers.add(key, value);
 		return headers;
 	}
