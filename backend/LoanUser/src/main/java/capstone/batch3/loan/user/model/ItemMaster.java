@@ -13,31 +13,39 @@ public class ItemMaster {
 
 	@Id
 	@Column(name = "item_id", nullable = false)
-	private long item_id;
+	private long itemId;
 
 	@Column(name = "issue_status")
-	private ItemIssueStatus issue_status;
+	private ItemIssueStatus issueStatus;
 
-	@Column(name = "catagory")
+	@Column(name = "category")
 	private String category;
 
 	@Column(name = "value")
 	private double value;
 
-	public long getItem_id() {
-		return item_id;
+	public ItemMaster(long itemId, ItemIssueStatus issueStatus, String category, double value) {
+		super();
+		this.itemId = itemId;
+		this.issueStatus = issueStatus;
+		this.category = category;
+		this.value = value;
 	}
 
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public long getItemId() {
+		return itemId;
 	}
 
-	public ItemIssueStatus getIssue_status() {
-		return issue_status;
+	public void setItemId(long itemId) {
+		this.itemId = itemId;
 	}
 
-	public void setIssue_status(ItemIssueStatus issue_status) {
-		this.issue_status = issue_status;
+	public ItemIssueStatus getIssueStatus() {
+		return issueStatus;
+	}
+
+	public void setIssueStatus(ItemIssueStatus issueStatus) {
+		this.issueStatus = issueStatus;
 	}
 
 	public String getCategory() {
@@ -52,7 +60,7 @@ public class ItemMaster {
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 

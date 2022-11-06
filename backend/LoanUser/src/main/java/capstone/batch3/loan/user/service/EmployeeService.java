@@ -7,7 +7,7 @@ import capstone.batch3.loan.user.enums.ItemIssueStatus;
 import capstone.batch3.loan.user.exception.GlobalLoanException;
 import capstone.batch3.loan.user.model.Employee;
 import capstone.batch3.loan.user.model.ItemMaster;
-import capstone.batch3.loan.user.model.Loancard;
+import capstone.batch3.loan.user.model.LoanCard;
 import capstone.batch3.loan.user.repository.EmployeeRepository;
 
 @Service
@@ -44,12 +44,12 @@ public class EmployeeService {
 		return employeeRepository.existsById(employee.getEmailId());
 	}
 
-	private boolean addItemToLoanCard(Loancard loancard, ItemMaster it) {
-		if (it.getIssue_status() == ItemIssueStatus.NOTISSUED) {
-			it.setIssue_status(ItemIssueStatus.ISSUED);
-			loancard.addNewItems(it);
-			double temp = loancard.getLoan_val() + it.getValue();
-			loancard.setLoan_val(temp);
+	private boolean addItemToLoanCard(LoanCard loanCard, ItemMaster it) {
+		if (it.getIssueStatus() == ItemIssueStatus.NOTISSUED) {
+			it.setIssueStatus(ItemIssueStatus.ISSUED);
+			loanCard.addNewItems(it);
+			double temp = loanCard.getLoan_val() + it.getValue();
+			loanCard.setLoan_val(temp);
 			return true;
 		} else {
 			return false;

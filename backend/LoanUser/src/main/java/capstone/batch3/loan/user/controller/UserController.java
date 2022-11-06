@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import capstone.batch3.loan.user.model.Employee;
-import capstone.batch3.loan.user.pojo.LoginPOJO;
 import capstone.batch3.loan.user.pojo.ResponseHeader;
 import capstone.batch3.loan.user.service.EmployeeService;
 
@@ -40,8 +39,8 @@ public class UserController {
 	public ResponseEntity<Employee> login(@PathVariable String email, @PathVariable String password) {
 		rh = new ResponseHeader();
 		rh.putOnMap("success", "true");
-		ResponseEntity<Employee> res = new ResponseEntity<Employee>(
-				employeeService.login(email, password), rh.getHeaders(), HttpStatus.OK);
+		ResponseEntity<Employee> res = new ResponseEntity<Employee>(employeeService.login(email, password),
+				rh.getHeaders(), HttpStatus.OK);
 		return res;
 	}
 }

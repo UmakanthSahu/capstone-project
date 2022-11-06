@@ -13,7 +13,7 @@ public class Employee {
 	@Id
 	@Column(name = "employee_id", nullable = false)
 	private long employeeId;
-	
+
 	@Column(name = "email_id", length = 30, nullable = false)
 	@NotBlank
 	@Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
@@ -23,9 +23,6 @@ public class Employee {
 	@Column(nullable = false, length = 50)
 	private String password;
 
-	public Employee() {
-	}
-
 	@Column(nullable = false, length = 40)
 	@NotBlank
 	@Pattern(regexp = "^[A-Za-z\\s]{2,40}$", message = "Invalid Name")
@@ -34,6 +31,9 @@ public class Employee {
 	@Column(name = "phone_number", nullable = false, length = 15)
 	@Pattern(regexp = "^[0-9+-]{8,15}", message = "Phone number must not be less than 8 or greater than 16 digits")
 	private String phoneNumber;
+
+	public Employee() {
+	}
 
 	public Employee(String name, String emailId, String password, String phoneNumber) {
 		this.emailId = emailId.trim();

@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Table(name = "employee_card_details")
 public class EmpCardDetails {
 
 	@Id
@@ -17,7 +19,7 @@ public class EmpCardDetails {
 	
 	@OneToOne // can have one loan details at a time
 	@JoinColumn(name = "loan_id")
-	private Loancard loancard;
+	private LoanCard loanCard;
 
 	@OneToOne // can have one loan details at a time
 	@JoinColumn(name = "employee_id")
@@ -26,18 +28,18 @@ public class EmpCardDetails {
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date card_issue_date;
 
-	public Loancard getLoancard() {
-		return loancard;
+	public LoanCard getLoanCard() {
+		return loanCard;
 	}
 
-	public EmpCardDetails(Loancard loancard, Employee employee) {
-		this.loancard = loancard;
+	public EmpCardDetails(LoanCard loanCard, Employee employee) {
+		this.loanCard = loanCard;
 		this.employee = employee;
 		this.card_issue_date = new Date(0);
 	}
 
-	public void setLoancard(Loancard loancard) {
-		this.loancard = loancard;
+	public void setLoancard(LoanCard loanCard) {
+		this.loanCard = loanCard;
 	}
 
 	public Employee getEmployee() {

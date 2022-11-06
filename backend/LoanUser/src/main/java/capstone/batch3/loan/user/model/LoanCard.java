@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "loan_table")
-public class Loancard {
+public class LoanCard {
 	@Id
 	@Column(name = "loan_id", nullable = false)
 	private long loan_id;
