@@ -67,6 +67,5 @@ public class LoanProcessingDetails {
 		return "LoanProcessingDetails [employeeId=" + employeeId + ", itemCategory=" + itemCategory
 				+ ", itemDescription=" + itemDescription + ", itemValue=" + itemValue + ", itemMake=" + itemMake + "]";
 	}
-	
 
 }

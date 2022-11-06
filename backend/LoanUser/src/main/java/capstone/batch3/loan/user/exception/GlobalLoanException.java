@@ -2,6 +2,7 @@ package capstone.batch3.loan.user.exception;
 
 public class GlobalLoanException extends RuntimeException {
 
+	private static final long serialVersionUID = 2822360230501440966L;
 	private String errorCode;
 	private String errorMessage;
 
