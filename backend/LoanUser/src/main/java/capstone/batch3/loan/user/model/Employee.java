@@ -32,6 +32,17 @@ public class Employee {
 	@Pattern(regexp = "^[0-9+-]{8,15}", message = "Phone number must not be less than 8 or greater than 16 digits")
 	private String phoneNumber;
 
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"employeeId=" + employeeId +
+				", emailId='" + emailId + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				'}';
+	}
+
 	public Employee() {
 	}
 

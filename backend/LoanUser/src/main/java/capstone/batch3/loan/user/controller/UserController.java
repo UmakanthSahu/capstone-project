@@ -17,7 +17,7 @@ import capstone.batch3.loan.user.model.Employee;
 import capstone.batch3.loan.user.pojo.ResponseHeader;
 import capstone.batch3.loan.user.service.EmployeeService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3002")
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -38,6 +38,7 @@ public class UserController {
 	@GetMapping(path = "/loginEmployee/{email}/{password}")
 	public ResponseEntity<Employee> login(@PathVariable String email, @PathVariable String password) {
 		rh = new ResponseHeader();
+		System.out.println(email + " " + password );
 		rh.putOnMap("success", "true");
 		ResponseEntity<Employee> res = new ResponseEntity<Employee>(employeeService.login(email, password),
 				rh.getHeaders(), HttpStatus.OK);

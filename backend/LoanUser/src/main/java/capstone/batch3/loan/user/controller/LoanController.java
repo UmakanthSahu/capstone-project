@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import capstone.batch3.loan.user.service.UserLoanService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3002")
 @RequestMapping("/api/v1")
 public class LoanController {
 

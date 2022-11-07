@@ -36,11 +36,22 @@ export const Navbar = (props) => {
               </>
             ) : (
               <>
+
                 <li className="nav-item">
-                  <Link className="nav-link" to="/dashboard">
-                    Dashboard
-                  </Link>
-                </li>
+                                  <Link className="nav-link" to="/itemsPurchased">
+                                    Items Purchased
+                                  </Link>
+                                </li>
+                                <li className="nav-item">
+                                                  <Link className="nav-link" to="/viewLoans">
+                                                    View Loans
+                                                  </Link>
+                                                </li>
+                                                <li className="nav-item">
+                                                                  <Link className="nav-link" to="/applyLoan">
+                                                                   Apply Loans
+                                                                  </Link>
+                                                                </li>
                 <li className="nav-item">
                   <Link className="nav-link" onClick={props.logoutHandler}>
                     Logout
