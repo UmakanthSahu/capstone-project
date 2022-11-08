@@ -36,6 +36,13 @@ public class EmployeeCardDetails implements Serializable {
 	public void setEmployeeCardDetailsId(EmployeeCardDetailsId employeeCardDetailsId) {
 		this.employeeCardDetailsId = employeeCardDetailsId;
 	}
+
+	@Override
+	public String toString() {
+		return "EmployeeCardDetails [employeeCardDetailsId=" + employeeCardDetailsId.getEmployeeMaster().getEmployeeId() +"--"+ employeeCardDetailsId.getLoanCardMaster().getLoanId() + ", cardIssueDate="
+				+ cardIssueDate + "]";
+	}
+	
 	
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ public class EmployeeIssueDetails {
 
 	@Id
 	@Column(name = "issue_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int issueId;
 
 	@ManyToOne
@@ -26,7 +29,7 @@ public class EmployeeIssueDetails {
 
 	@Column(name = "issue_status")
 	private String issueStatus;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "item_id")
 	private ItemMaster itemMaster;
@@ -44,9 +47,6 @@ public class EmployeeIssueDetails {
 	public void setIssueId(int issueId) {
 		this.issueId = issueId;
 	}
-
-	
-	
 
 	public String getIssueStatus() {
 		return issueStatus;
@@ -79,8 +79,6 @@ public class EmployeeIssueDetails {
 	public void setItemId(ItemMaster itemMaster) {
 		this.itemMaster = itemMaster;
 	}
-
-
 
 	public Date getIssueDate() {
 		return issueDate;

@@ -17,7 +17,7 @@ import capstone.batch3.loan.user.model.EmployeeMaster;
 import capstone.batch3.loan.user.pojo.ResponseHeader;
 import capstone.batch3.loan.user.service.EmployeeService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000",  "http://localhost:3001", "http://localhost:3002"})
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {

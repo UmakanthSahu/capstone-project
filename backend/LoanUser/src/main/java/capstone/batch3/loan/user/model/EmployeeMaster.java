@@ -44,8 +44,6 @@ public class EmployeeMaster {
 			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Invalid Email Address")
 	private String emailId;
 
-	@Column
-	private char gender;
 
 	@Column
 	private Date dateOfBirth;
@@ -78,22 +76,7 @@ public class EmployeeMaster {
 		this.employeeLoanCards = employeeLoanCards;
 	}
 
-	public EmployeeMaster(int employeeId,
-			@NotBlank @Pattern(regexp = "^[A-Za-z\\s]{2,40}$", message = "Invalid Name") String name,
-			String designation, String department, String password,
-			@NotBlank @Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Invalid Email Address") String emailId,
-			char gender, Date dateOfBirth, Date dateOfJoining) {
-		super();
-		this.employeeId = employeeId;
-		this.name = name;
-		this.designation = designation;
-		this.department = department;
-		this.password = password;
-		this.emailId = emailId;
-		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
-		this.dateOfJoining = dateOfJoining;
-	}
+	
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -143,13 +126,6 @@ public class EmployeeMaster {
 		this.emailId = emailId;
 	}
 
-	public char getGender() {
-		return gender;
-	}
-
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
 
 	public Date getDateOfBirth() {
 		return dateOfBirth;

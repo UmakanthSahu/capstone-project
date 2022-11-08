@@ -31,6 +31,8 @@ public class ItemMaster {
 	
 	
 
+	
+
 	@Column(name = "item_category")
 	private String itemCategory;
 
@@ -40,6 +42,22 @@ public class ItemMaster {
 	@OneToMany(mappedBy = "itemMaster")
 	private List<EmployeeIssueDetails> employeeIssueDetails = new ArrayList<EmployeeIssueDetails>();
 
+	
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public List<EmployeeIssueDetails> getEmployeeIssueDetails() {
+		return employeeIssueDetails;
+	}
+
+	public void setEmployeeIssueDetails(List<EmployeeIssueDetails> employeeIssueDetails) {
+		this.employeeIssueDetails = employeeIssueDetails;
+	}
 	public int getItemId() {
 		return itemId;
 	}

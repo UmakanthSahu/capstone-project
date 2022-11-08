@@ -44,13 +44,6 @@ public class LoanCardMaster {
 		this.employeeLoanCards = employeeLoanCards;
 	}
 
-	public LoanCardMaster(int loanId, String loanType, int durationInYears) {
-		super();
-		this.loanId = loanId;
-		this.loanType = loanType;
-		this.durationInYears = durationInYears;
-	}
-
 	public int getLoanId() {
 		return loanId;
 	}
