@@ -12,6 +12,7 @@ import capstone.batch3.loan.user.model.ItemMaster;
 import capstone.batch3.loan.user.model.Loancard;
 import capstone.batch3.loan.user.repository.EmpCardDetailsRepository;
 import capstone.batch3.loan.user.repository.EmployeeRepository;
+import capstone.batch3.loan.user.repository.ItemMasterRepository;
 import capstone.batch3.loan.user.repository.LoancardRepository;
 
 
@@ -21,7 +22,9 @@ public class UserLoanService {
 	private static EmpCardDetailsRepository empcardrepo;
 	@Autowired
 	private static LoancardRepository loanrepo;
-
+	@Autowired
+	private static ItemMasterRepository itrepo;
+	
 	public List<ItemMaster> getLoanCardItems(Employee e) {
 		Loancard loan1 = empcardrepo.findByEmployee(e).getLoancard();
 		System.err.println(loan1);
@@ -48,10 +51,10 @@ public class UserLoanService {
 		loan1.setLoan_val(get_item_val+loanVal);
 		return loan1;
 	}
-		
-		
-		
-		
+	public static List<ItemMaster> getallItems() {
+		return itrepo.findAll();
+	}
 	
+		
 
 }

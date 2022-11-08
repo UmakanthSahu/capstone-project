@@ -89,4 +89,12 @@ public class UserController {
 			userLoanService.addnewitems(e,i),
 			rh.getHeaders(), HttpStatus.OK);
 			return res;	}
+	@PostMapping(path = "/getallitems", consumes = "application/json")
+	public ResponseEntity <List<ItemMaster>>  getallitems() {
+			rh = new ResponseHeader();
+			rh.putOnMap("success", "true");
+			ResponseEntity<List<ItemMaster>> res = new ResponseEntity<List<ItemMaster>>(
+			userLoanService.getallItems(),
+			rh.getHeaders(), HttpStatus.OK);
+			return res;	}
 }
