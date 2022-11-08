@@ -4,22 +4,22 @@ import capstone.batch3.loan.user.model.EmployeeMaster;
 
 public class EmployeeLoginResponse {
 
-	private int employeeid;
+	private int employeeId;
 	private String employeeDesignation;
 	private String department;
 	
 	public EmployeeLoginResponse(EmployeeMaster employeeMaster) {
-		this.employeeid = employeeMaster.getEmployeeId();
+		this.employeeId = employeeMaster.getEmployeeId();
 		this.employeeDesignation  = employeeMaster.getDesignation();
 		this.department = employeeMaster.getDepartment();
 	}
 
 	public int getEmployeeid() {
-		return employeeid;
+		return employeeId;
 	}
 
 	public void setEmployeeid(int employeeid) {
-		this.employeeid = employeeid;
+		this.employeeId = employeeid;
 	}
 
 	public String getEmployeeDesignation() {

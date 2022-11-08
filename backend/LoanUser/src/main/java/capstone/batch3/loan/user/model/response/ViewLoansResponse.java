@@ -7,25 +7,25 @@ import capstone.batch3.loan.user.model.LoanCardMaster;
 
 public class ViewLoansResponse {
 
-	private int loadId;
+	private int loanId;
 	private String loanType;
 	private int durationInYears;
 	private LocalDate cardIssueDate;
 
 	public ViewLoansResponse(LoanCardMaster loanCardMaster, Date date) {
 		// TODO Auto-generated constructor stub
-		this.loadId = loanCardMaster.getLoanId();
+		this.loanId = loanCardMaster.getLoanId();
 		this.loanType = loanCardMaster.getLoanType();
 		this.durationInYears = loanCardMaster.getDurationInYears();
 		this.cardIssueDate = date.toLocalDate();
 	}
 
 	public int getLoadId() {
-		return loadId;
+		return loanId;
 	}
 
 	public void setLoadId(int loadId) {
-		this.loadId = loadId;
+		this.loanId = loadId;
 	}
 
 	public String getLoanType() {

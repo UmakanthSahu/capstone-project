@@ -51,13 +51,16 @@ public class ItemMaster {
 		this.itemName = itemName;
 	}
 
-	/*public List<EmployeeIssueDetails> getEmployeeIssueDetails() {
-		return employeeIssueDetails;
-	}
 
-	public void setEmployeeIssueDetails(List<EmployeeIssueDetails> employeeIssueDetails) {
-		this.employeeIssueDetails = employeeIssueDetails;
-	}*/
+//	public List<EmployeeIssueDetails> getEmployeeIssueDetails() {
+//		return employeeIssueDetails;
+//	}
+//
+//	public void setEmployeeIssueDetails(List<EmployeeIssueDetails> employeeIssueDetails) {
+//		this.employeeIssueDetails = employeeIssueDetails;
+//	}
+	
+
 	public int getItemId() {
 		return itemId;
 	}
