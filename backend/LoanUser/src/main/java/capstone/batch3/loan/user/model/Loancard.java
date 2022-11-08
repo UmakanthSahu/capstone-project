@@ -1,6 +1,7 @@
 package capstone.batch3.loan.user.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -29,6 +30,12 @@ public class Loancard {
 	@OneToOne // can have one loan details at a time
 	@JoinColumn(name = "employee_id")
 	private Employee connect_emp;
+	public Loancard(Employee e){
+		this.connect_emp=e;
+		this.loan_val=0;
+		this.items=new ArrayList<>();
+		this.long_duration=0;
+	}
 
 	public Employee getConnect_emp() {
 		return connect_emp;
