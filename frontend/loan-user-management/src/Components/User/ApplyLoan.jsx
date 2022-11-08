@@ -3,6 +3,8 @@ import { APPLY_LOAN_URL, getJsonPostRequestData } from "../../Services/ApiServic
 
 export const ApplyLoan = (props) => {
 
+const afewItems =[{"itemId":101, "itemDescription": "comfortable","itemCategory": "Furniture", "itemValuation" :30000},{"itemId":102, "itemDescription": "comfortable plus good","itemCategory": "something else", "itemValuation" :1000}];
+
   const ItemCategories = [{id:'1', name:'Furniture'},{id:'2', name:'Crockery'}];
 
   const products = [
@@ -39,15 +41,21 @@ export const ApplyLoan = (props) => {
                                        {id:"4",productID:"4",name:"Son Diego"}
                                      ]
 
+const[afewItem, setafewItem] =useState([]);
 const [ product, setProduct] = useState([]);
-  const [itemDescription, setItemDescription] = useState([]);
+  const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState("");
-  const [itemCategory, setItemCategory] = useState([]);
+  const [itemCategory, setItemCategory] = useState("");
   const [itemMake, setItemMake] = useState("Ceramic");
 
 useEffect(()=>{
     setItemCategory(ItemCategories);
   },[])
+
+
+  useEffect(()=>{
+      setafewItem(afewItems);
+    },[])
 
 
   const handleItemCategory = (id) => {
@@ -113,20 +121,27 @@ useEffect(()=>{
                   className="form-select form-select-sm"
                   aria-label=".form-select-lg example"
                   name="itemCategory"
+                  value ={itemCategory}
+                  options={afewItems}
+
                     onChange={(e) => handleItemCategory(e.target.value)}
                 >
                 <option value="0">Select Category</option>
-                      {
-                        itemCategory &&
-                        itemCategory !== undefined ?
-                        itemCategory.map((ctr,index) => {
-                            return(
-                                <option key={index} value={ctr.id}>{ctr.name}</option>
-                            )
-                        })
-                        :"No Category"
+                     {
+                                             afewItem &&
+                                             afewItem !== undefined ?
+                                             afewItem.map((ctr,index) => {
+                                                 return(
 
-                      }
+                                                 <option key={index} value={ctr.itemCategory}>{ctr.itemCategory}</option>
+
+                                                 )
+                                             })
+                                             :"No Category"
+
+                                           }
+
+
 
                 </select>
               </div>

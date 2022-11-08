@@ -5,14 +5,14 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import capstone.batch3.loan.user.model.Employee;
+import capstone.batch3.loan.user.model.EmployeeMaster;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, String> {
+public interface EmployeeRepository extends JpaRepository<EmployeeMaster, String> {
 
 //	@Query("SELECT emailId FROM Employee WHERE email_id=?1 AND password=?2")
-	public Optional<Employee> findByEmailIdAndPassword(String emailId, String password);
+	public Optional<EmployeeMaster> findByEmailIdAndPassword(String emailId, String password);
 
-	public Employee findByEmailId(String emailId);
+	public EmployeeMaster findByEmailId(String emailId);
 
 }

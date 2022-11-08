@@ -1,13 +1,12 @@
 package capstone.batch3.loan.user.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import capstone.batch3.loan.user.enums.ItemIssueStatus;
-import capstone.batch3.loan.user.exception.GlobalLoanException;
-import capstone.batch3.loan.user.model.Employee;
-import capstone.batch3.loan.user.model.ItemMaster;
-import capstone.batch3.loan.user.model.LoanCard;
+import capstone.batch3.loan.user.model.EmployeeMaster;
+import capstone.batch3.loan.user.model.response.EmployeeLoginResponse;
 import capstone.batch3.loan.user.repository.EmployeeRepository;
 
 @Service
@@ -16,21 +15,12 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public Employee login(String email, String password) {
-		Employee cus = employeeRepository.findByEmailId(email);
-		System.err.println(cus);
-		if (cus == null) {
-			throw new GlobalLoanException("404", "No customer with this credential");
-		} else if (cus.getPassword().equals(password)) {
-			return cus;
-		}
-
-		else {
-			throw new GlobalLoanException("403", "Wrong password");
-		}
+	public EmployeeLoginResponse login(String email, String password) {
+		Optional<EmployeeMaster> employee = employeeRepository.findByEmailIdAndPassword(email, password);
+		return employee.isPresent() ? new EmployeeLoginResponse(employee.get()) : null;
 	}
 
-	public Employee addEmployee(Employee employee) {
+	public EmployeeMaster addEmployee(EmployeeMaster employee) {
 		if (existsById(employee)) {
 			return null;
 		}
@@ -40,20 +30,20 @@ public class EmployeeService {
 		return employee;
 	}
 
-	private boolean existsById(Employee employee) {
+	private boolean existsById(EmployeeMaster employee) {
 		return employeeRepository.existsById(employee.getEmailId());
 	}
 
-	private boolean addItemToLoanCard(LoanCard loanCard, ItemMaster it) {
-		if (it.getIssueStatus() == ItemIssueStatus.NOTISSUED) {
-			it.setIssueStatus(ItemIssueStatus.ISSUED);
-			loanCard.addNewItems(it);
-			double temp = loanCard.getLoan_val() + it.getValue();
-			loanCard.setLoan_val(temp);
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	private boolean addItemToLoanCard(LoanCard loanCard, ItemMaster it) {
+//		if (it.getIssueStatus() == ItemIssueStatus.NOTISSUED) {
+//			it.setIssueStatus(ItemIssueStatus.ISSUED);
+//			loanCard.addNewItems(it);
+//			double temp = loanCard.getLoan_val() + it.getValue();
+//			loanCard.setLoan_val(temp);
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 }
