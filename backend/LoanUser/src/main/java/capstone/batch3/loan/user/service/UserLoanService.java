@@ -14,6 +14,7 @@ import capstone.batch3.loan.user.model.LoanCardMaster;
 import capstone.batch3.loan.user.model.request.ApplyLoanRequest;
 import capstone.batch3.loan.user.model.response.ViewLoansResponse;
 import capstone.batch3.loan.user.repository.EmployeeCardDetailsRepository;
+import capstone.batch3.loan.user.repository.EmployeeIssueDetailsRepository;
 import capstone.batch3.loan.user.repository.LoanCardMasterRepository;
 
 @Service

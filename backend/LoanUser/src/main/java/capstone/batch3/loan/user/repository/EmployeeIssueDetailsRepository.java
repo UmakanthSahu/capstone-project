@@ -1,4 +1,4 @@
-package capstone.batch3.loan.user.service;
+package capstone.batch3.loan.user.repository;
 
 import java.sql.Date;
 import java.util.List;

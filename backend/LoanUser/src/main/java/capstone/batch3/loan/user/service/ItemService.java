@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import capstone.batch3.loan.user.model.EmployeeIssueDetails;
 import capstone.batch3.loan.user.model.ItemMaster;
 import capstone.batch3.loan.user.model.response.PurchasedItemResponse;
+import capstone.batch3.loan.user.repository.EmployeeIssueDetailsRepository;
 import capstone.batch3.loan.user.repository.ItemRepository;
 
 @Service

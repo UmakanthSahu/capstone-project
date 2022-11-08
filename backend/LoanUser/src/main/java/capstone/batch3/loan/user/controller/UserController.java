@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import capstone.batch3.loan.user.model.EmployeeMaster;
+import capstone.batch3.loan.user.model.response.EmployeeLoginResponse;
 import capstone.batch3.loan.user.pojo.ResponseHeader;
 import capstone.batch3.loan.user.service.EmployeeService;
 
@@ -36,12 +37,8 @@ public class UserController {
 	}
 
 	@GetMapping(path = "/loginEmployee/{email}/{password}")
-	public ResponseEntity<EmployeeMaster> login(@PathVariable String email, @PathVariable String password) {
-		rh = new ResponseHeader();
-		System.out.println(email + " " + password );
-		rh.putOnMap("success", "true");
-		ResponseEntity<EmployeeMaster> res = new ResponseEntity<EmployeeMaster>(employeeService.login(email, password),
-				rh.getHeaders(), HttpStatus.OK);
-		return res;
+	public ResponseEntity<?> login(@PathVariable String email, @PathVariable String password) {
+		EmployeeLoginResponse employeeLoginResponse = employeeService.login(email, password);
+		return employeeLoginResponse != null ? ResponseEntity.ok(employeeLoginResponse) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 }

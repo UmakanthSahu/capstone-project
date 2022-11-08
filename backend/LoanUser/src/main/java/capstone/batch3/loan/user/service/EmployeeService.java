@@ -1,10 +1,12 @@
 package capstone.batch3.loan.user.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import capstone.batch3.loan.user.exception.GlobalLoanException;
 import capstone.batch3.loan.user.model.EmployeeMaster;
+import capstone.batch3.loan.user.model.response.EmployeeLoginResponse;
 import capstone.batch3.loan.user.repository.EmployeeRepository;
 
 @Service
@@ -13,18 +15,9 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public EmployeeMaster login(String email, String password) {
-		EmployeeMaster cus = employeeRepository.findByEmailId(email);
-		System.err.println(cus);
-		if (cus == null) {
-			throw new GlobalLoanException("404", "No customer with this credential");
-		} else if (cus.getPassword().equals(password)) {
-			return cus;
-		}
-
-		else {
-			throw new GlobalLoanException("403", "Wrong password");
-		}
+	public EmployeeLoginResponse login(String email, String password) {
+		Optional<EmployeeMaster> employee = employeeRepository.findByEmailIdAndPassword(email, password);
+		return employee.isPresent() ? new EmployeeLoginResponse(employee.get()) : null;
 	}
 
 	public EmployeeMaster addEmployee(EmployeeMaster employee) {

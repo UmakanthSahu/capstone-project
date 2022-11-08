@@ -1,24 +1,41 @@
 package capstone.batch3.loan.user.model.response;
 
-public class EmployeeLoginResponse extends EmployeeResponse {
-	private final boolean loginSuccess;
+import capstone.batch3.loan.user.model.EmployeeMaster;
 
-	public EmployeeLoginResponse(String description) {
-		super(description);
-		loginSuccess = false;
+public class EmployeeLoginResponse {
+
+	private int employeeid;
+	private String employeeDesignation;
+	private String department;
+	
+	public EmployeeLoginResponse(EmployeeMaster employeeMaster) {
+		this.employeeid = employeeMaster.getEmployeeId();
+		this.employeeDesignation  = employeeMaster.getDesignation();
+		this.department = employeeMaster.getDepartment();
 	}
 
-	public EmployeeLoginResponse(boolean loginSuccess, String description) {
-		super(description);
-		this.loginSuccess = loginSuccess;
+	public int getEmployeeid() {
+		return employeeid;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setEmployeeid(int employeeid) {
+		this.employeeid = employeeid;
 	}
 
-	public boolean isLoginSuccess() {
-		return loginSuccess;
+	public String getEmployeeDesignation() {
+		return employeeDesignation;
+	}
+
+	public void setEmployeeDesignation(String employeeDesignation) {
+		this.employeeDesignation = employeeDesignation;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 }
