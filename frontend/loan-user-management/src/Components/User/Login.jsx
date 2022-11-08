@@ -23,7 +23,7 @@ export const Login = (props) => {
           console.log(resp);
           const data = await resp.json();
           if (resp.status === 200) {
-            props.setAuthorizedLogin(data.employeeId);
+            props.setAuthorizedLogin(data);
             props.navigate("/dashboard");
             console.log("Login Success");
           } else {

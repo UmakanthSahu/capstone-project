@@ -6,7 +6,7 @@ export const LogoutSuccess = (props) => {
   
   useEffect(() => {
     setTimeout(() => {
-        props.setAuthorizedLogin("");
+        props.setAuthorizedLogin(null);
         navigate("/login");
       }, 3000);
   });

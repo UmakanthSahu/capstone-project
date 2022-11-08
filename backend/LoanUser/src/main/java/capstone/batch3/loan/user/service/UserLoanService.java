@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -34,7 +35,7 @@ public class UserLoanService {
 		return employeeCardDetailsRepository.getActiveLoans(employeeId).stream()
 				.map(details -> new ViewLoansResponse(details.getEmployeeCardDetailsId().getLoanCardMaster(),
 						details.getCardIssueDate()))
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 	@Transactional
@@ -57,6 +58,6 @@ public class UserLoanService {
 					unusedLoanCardMaster.getLoanId(), today);
 		}
 		
-		employeeIssueDetailsRepository.insertRecord(today, unusedLoanCard.isEmpty() ? "Rejected" : "Active", applyLoanRequest.getEmployeeId(), applyLoanRequest.getItemId());
+		employeeIssueDetailsRepository.insertRecord(today, !unusedLoanCard.isPresent() ? "Rejected" : "Active", applyLoanRequest.getEmployeeId(), applyLoanRequest.getItemId());
 	}
 }

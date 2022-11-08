@@ -26,7 +26,7 @@ export const Navbar = (props) => {
                 Home
               </Link>
             </li>
-            {props.authorizedLogin === "" ? (
+            {props.authorizedLogin === null ? (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
