@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { APPLY_LOAN_URL, getJsonPostRequestData } from "../../Services/ApiService";
 import {GET_ALL_ITEMS_URL, getRequestHeaders} from "../../Services/ApiService";
-
+import { useForm } from 'react-hook-form';
+// import { axios } from 'axios';
 export const ApplyLoan = (props) => {
 
 
@@ -46,8 +47,10 @@ export const ApplyLoan = (props) => {
 //   const [itemDescription, setItemDescription] = useState("");
 //const [itemCategory, setItemCategory] = useState("");
 const [categoryData, setCategoryData] = useState([]);
+const [categoryDataChoice, setCategoryDataChoice] = useState("");
 const [makeData, setMakeData] = useState([]);
 const [itemsData, setItemsData] = useState([]);
+const {register,watch, formState:{errors}}=useForm();
 //   const [itemMake, setItemMake] = useState("Ceramic");
 
 // useEffect(()=>{
@@ -92,21 +95,21 @@ const [itemsData, setItemsData] = useState([]);
         console.log(props.authorizedLogin, "ello");
         //console.log(emp);
         fetch(GET_ALL_ITEMS_URL,getRequestHeaders())
-        .then(async(res) => {
-        setProducts(await res.json());
+        .then((res) => {
+        setProducts( res.json());
+        console.log(res.data);
         console.log(products, "Umaaaaaa");
         let localData =[];
         let keys =[];
         for(let item in products){
-        if(!keys.includes(products[item].itemCategory)){
-        localData.push(<option key={item} value={products[item].itemCategory.toLowerCase()}>{products[item].itemCategory}</option>);
-        keys.push(products[item].itemCategory);
+            if(!keys.includes(products[item].itemCategory)){
+            localData.push(<option key={item} value={products[item].itemCategory.toLowerCase()}>{products[item].itemCategory}</option>);
+            keys.push(products[item].itemCategory);
+            }
         }
         setCategoryData(localData);
         console.log(categoryData);
-
-        }
-        })
+    })
         //fetch call
         },[])
 
@@ -128,9 +131,22 @@ const [itemsData, setItemsData] = useState([]);
 //
 // }
 
+// useEffect(()=>{
+//
+//
+// })
+// const handleSample =(id) =>
+//
+// {
+// console.log("hello");
+// //let dt = products.filter(x => x.itemCategory === id);
+//
+//
+// }
 
 
-
+// const { register, watch } = useForm();
+//   const title = watch('itemCategory');
 
 
 
@@ -153,8 +169,9 @@ const [itemsData, setItemsData] = useState([]);
                   className="form-control"
                   id="text"
                   name="employeeId"
-                  value={props.authorizedLogin}
+                  value={props.authorizedLogin.employeeid}
                   disabled
+                  {...register('employeeid',{required: 'employeeid is required'})}
                 />
               </div>
               <div className="mb-3">
@@ -166,11 +183,16 @@ const [itemsData, setItemsData] = useState([]);
                   className="form-select form-select-sm"
                   aria-label=".form-select-lg example"
                   name="itemCategory"
-// onChange={(e)=>console.log(e.target.value)}
+               onChange={(e)=>{ setCategoryDataChoice(e.target.value)
+               console.log(categoryDataChoice)}}
+               {...register('itemCategory',{required: 'select an option'})}
+
                 >
+
                 <option value="1">Hello</option>
                 <option value="0">Select Category</option>
                 {categoryData}
+
 
 {/*                      { */}
 {/*                                              afewItem && */}
@@ -201,8 +223,7 @@ const [itemsData, setItemsData] = useState([]);
 
                                 name="itemMake"
                                 htmlFor="itemMake"
-
-                                required
+                                {...register('itemMake',{required: 'select an option'})}
                               >
                                 <option value="0">Select Product</option>
 
