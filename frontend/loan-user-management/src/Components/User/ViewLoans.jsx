@@ -35,17 +35,17 @@ export const ViewLoans = (props)=>{
             <div className="ViewLoans-header">
                 <div className="ViewLoans-header-item">
                     <h5>Employee ID</h5>
-                    <h6>{employeeId}</h6>
+                    <h6>{props.authorizedLogin.employeeid}</h6>
                 </div>
 
                 <div  className="ViewLoans-header-item">
                     <h5>Designation</h5>
-                    <h6>{designation}</h6>
+                    <h6>{props.authorizedLogin.employeeDesignation}</h6>
                 </div>
 
                 <div  className="ViewLoans-header-item">
                     <h5>Department</h5>
-                    <h6>{department}</h6>
+                    <h6>{props.authorizedLogin.department}</h6>
                 </div>
             </div>
 

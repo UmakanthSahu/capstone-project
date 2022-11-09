@@ -2,6 +2,7 @@ const BASE_API_URL = "http://localhost:8080/api/v1/";
 export const APPLY_LOAN_URL = BASE_API_URL + "applyLoan";
 export const VIEW_LOANS_URL = BASE_API_URL + "viewLoans";
 export const PURCHASED_ITEMS_URL = BASE_API_URL + "viewPurchasedItems";
+export const GET_ALL_ITEMS_URL = BASE_API_URL + "getAllItems";
 export const getJsonPostRequestData = (data) => {
   return {
     method: "POST",

@@ -19,7 +19,7 @@ function App() {
   const navigate = useNavigate();
 
   function isUserLoggedIn() {
-  console.log(authorizedLogin);
+  //console.log(authorizedLogin);
    return authorizedLogin !== null;
   }
 
