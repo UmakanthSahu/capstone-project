@@ -9,6 +9,8 @@ import { Dashboard } from "./Components/User/Dashboard";
 import { ViewLoans } from "./Components/User/ViewLoans";
 import { ItemsPurchased } from "./Components/User/ItemsPurchased";
 import { LogoutSuccess } from "./Components/User/LogoutSuccess";
+import { Register } from "./Components/Common/Register";
+import { Error } from "./Components/User/Error";
 
 function App() {
   const authorizedLoginFromSessionStorage =
@@ -58,11 +60,15 @@ function App() {
             exact
             path="/login"
             element={
-              <Login
-                authorizedLogin={authorizedLogin}
-                setAuthorizedLogin={setAuthorizedLogin}
-                navigate={navigate}
-              />
+              isUserLoggedIn() ? (
+                <Navigate to="/dashboard"></Navigate>
+              ) : (
+                <Login
+                  authorizedLogin={authorizedLogin}
+                  setAuthorizedLogin={setAuthorizedLogin}
+                  navigate={navigate}
+                />
+              )
             }
           />
           <Route
@@ -120,6 +126,14 @@ function App() {
             path="/logoutSuccess"
             element={<LogoutSuccess setAuthorizedLogin={setAuthorizedLogin} />}
           />
+          <Route
+            exact
+            path="/register"
+            element={<Register />}
+          />
+
+          <Route extact path="/error" element={isUserLoggedIn() ?<Error/> : <Navigate to="/login"/>} />
+
           <Route exact path="/" element={<Home />} />
         </Routes>
       </div>

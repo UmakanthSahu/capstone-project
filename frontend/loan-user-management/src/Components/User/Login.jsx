@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { getJsonPostRequestData, getLoginUrl, getRequestHeaders} from "../../Services/ApiService";
-import { isValidPasswordLength } from "../../Services/FormValidation";
+import { getLoginUrl, getRequestHeaders } from "../../Services/ApiService";
+import { isValidEmail, isValidPasswordLength } from "../../Services/FormValidation";
 
 export const Login = (props) => {
   const [username, setUsername] = useState("");
@@ -10,29 +10,23 @@ export const Login = (props) => {
     event.preventDefault();
 
     // validation of form input
-    if (isValidPasswordLength(password)) {
-      let employeeLoginData = {
-        employeeId: username,
-        password: password,
-      };
-      // console.log(employeeLoginData, getLoginUrl(username, password));
-      
+    if (isValidEmail(username) && isValidPasswordLength(password)) {
       //connecting with backend
       fetch(getLoginUrl(username, password), getRequestHeaders())
         .then(async (resp) => {
-          console.log(resp);
-          const data = await resp.json();
           if (resp.status === 200) {
+            const data = await resp.json();
             props.setAuthorizedLogin(data);
             props.navigate("/dashboard");
-            console.log("Login Success");
-          } else {
-            window.alert("Invalid Credentials")
-            props.navigate("/login");
+          }else if(resp.status === 401){
+            window.alert("Invalid Credentials.")
+            props.navigate("/register")
           }
         })
         .catch((err) => {
-          window.alert("Something went wrong.... Please try again after some time");
+          window.alert(
+            "Something went wrong.... Please try again after some time"
+          );
         });
     } else {
       setPassword("");
@@ -47,17 +41,16 @@ export const Login = (props) => {
           <form onSubmit={onSubmitLoginHandler}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
-                Username
+                Email
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="text"
-                name="employeeId"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 onBlur={(e) => setUsername(e.target.value.trim())}
-                placeholder="Enter your username"
+                placeholder="Enter your Email Id"
                 required
               />
             </div>
@@ -69,7 +62,6 @@ export const Login = (props) => {
                 type="password"
                 className="form-control"
                 id="password"
-                name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your Password"

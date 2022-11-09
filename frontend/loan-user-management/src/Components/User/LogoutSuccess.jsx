@@ -3,12 +3,12 @@ import { useNavigate, Link } from "react-router-dom";
 
 export const LogoutSuccess = (props) => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     setTimeout(() => {
-        props.setAuthorizedLogin(null);
-        navigate("/login");
-      }, 3000);
+      props.setAuthorizedLogin(null);
+      navigate("/login");
+    }, 3000);
   });
 
   return (

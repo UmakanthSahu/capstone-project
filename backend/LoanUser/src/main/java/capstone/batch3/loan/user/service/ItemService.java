@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import capstone.batch3.loan.user.model.ItemMaster;
 import capstone.batch3.loan.user.model.response.PurchasedItemResponse;
 import capstone.batch3.loan.user.repository.EmployeeIssueDetailsRepository;
-import capstone.batch3.loan.user.repository.ItemRepository;
+import capstone.batch3.loan.user.repository.ItemMasterRepository;
 
 /*
  * Service class to handle getAllItems and getPurchasedItems
@@ -19,7 +19,7 @@ import capstone.batch3.loan.user.repository.ItemRepository;
 public class ItemService {
 
 	@Autowired
-	private ItemRepository itemRepository;
+	private ItemMasterRepository itemRepository;
 
 	@Autowired
 	private EmployeeIssueDetailsRepository employeeIssueDetailsRepository;
@@ -29,8 +29,11 @@ public class ItemService {
 	}
 
 	public List<PurchasedItemResponse> getPurchasedItems(Integer employeeId) {
-		return employeeIssueDetailsRepository.findByEmployeeId(employeeId).stream()
-				.map(item -> new PurchasedItemResponse(item.getIssueId(), item.getItemMaster())).collect(Collectors.toList());
+		return employeeIssueDetailsRepository.findByEmployeeId(employeeId)
+				.stream()
+				.filter(item -> item.getIssueStatus().equals("Active"))
+				.map(item -> new PurchasedItemResponse(item.getIssueId(), item.getItemMaster()))
+				.collect(Collectors.toList());
 	}
 
 }

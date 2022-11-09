@@ -1,472 +1,207 @@
-import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-import { APPLY_LOAN_URL, getJsonPostRequestData } from "../../Services/ApiService";
-import {GET_ALL_ITEMS_URL, getRequestHeaders} from "../../Services/ApiService";
-import { useForm } from 'react-hook-form';
-// import { axios } from 'axios';
-export const ApplyLoan = (props) => {
-
-
-//   const ItemCategories = [{id:'1', name:'Furniture'},{id:'2', name:'Crockery'}];
-//
-//   const products = [
-//       {id:"1",itemCategoryID:"1",name:"chair"},
-//       {id:"2",itemCategoryID:"1",name:"chair 2"},
-//       {id:"3",itemCategoryID:"2",name:"chair 3"},
-//       {id:"4",itemCategoryID:"2",name:"chair 4"},
-//       {id:"1",itemCategoryID:"3",name:"chair 5"},
-//       {id:"2",itemCategoryID:"3",name:"chair 6 "},
-//       {id:"3",itemCategoryID:"4",name:"chair 7"},
-//       {id:"4",itemCategoryID:"4",name:"chair 8"}
-//     ]
-
-
-//     const itemValues = [
-//         {id:"1",productID:"1",name:"Faridabad"},
-//         {id:"2",productID:"1",name:"Palwal"},
-//         {id:"3",productID:"2",name:"Mandi House"},
-//         {id:"4",productID:"2",name:"kalka Ji"},
-//         {id:"1",productID:"3",name:"Houston"},
-//         {id:"2",productID:"3",name:"Austin"},
-//         {id:"3",productID:"4",name:"Los Angeles"},
-//         {id:"4",productID:"4",name:"Son Diego"}
-//       ]
-//
-//       const itemDescriptions = [
-//                                        {id:"1",productID:"1",name:"Faridabad"},
-//                                        {id:"2",productID:"1",name:"Palwal"},
-//                                        {id:"3",productID:"2",name:"Mandi House"},
-//                                        {id:"4",productID:"2",name:"kalka Ji"},
-//                                        {id:"1",productID:"3",name:"Houston"},
-//                                        {id:"2",productID:"3",name:"Austin"},
-//                                        {id:"3",productID:"4",name:"Los Angeles"},
-//                                        {id:"4",productID:"4",name:"Son Diego"}
-//                                      ]
-//
-// const[afewItem, setafewItem] =useState([]);
-// const [ product, setProduct] = useState([]);
-//   const [itemDescription, setItemDescription] = useState("");
-//const [itemCategory, setItemCategory] = useState("");
-const [categoryData, setCategoryData] = useState([]);
-const [categoryDataChoice, setCategoryDataChoice] = useState("");
-const [makeData, setMakeData] = useState([]);
-const [itemsData, setItemsData] = useState([]);
-const {register,watch, formState:{errors}}=useForm();
-//   const [itemMake, setItemMake] = useState("Ceramic");
-
-// useEffect(()=>{
-//     setItemCategory(ItemCategories);
-//   },[])
-//
-//
-//   useEffect(()=>{
-//       setafewItem(afewItems);
-//     },[])
-
-
-
-
-
-
-//
-//     const handleProduct = (id) => {
-//         const dt = itemValues.filter(x => x.productID === id);
-//         const dt2 = itemDescriptions.filter(x => x.productID === id);
-//         setItemValue(dt);
-//         setItemDescription(dt2);
-//       }
-
-
-//   const onApplyLoanSubmitHandler = (e) => {
-//     e.preventDefault();
-//     let applyLoanFormData = {
-//       employeeId: props.authorizedLogin,
-//       itemValue: itemValue,
-//       itemCategory: itemCategory,
-//       itemMake: itemMake,
-//       itemDescription: itemDescription,
-//     };}
-//
-//     console.log(applyLoanFormData);
-
-
-         const [products, setProducts]=useState([]);
-        //CHNAGE EMPLOYEEID NKCKCD
-        useEffect(()=>{
-        console.log(props.authorizedLogin, "ello");
-        //console.log(emp);
-        fetch(GET_ALL_ITEMS_URL,getRequestHeaders())
-        .then((res) => {
-        setProducts( res.json());
-        console.log(res.data);
-        console.log(products, "Umaaaaaa");
-        let localData =[];
-        let keys =[];
-        for(let item in products){
-            if(!keys.includes(products[item].itemCategory)){
-            localData.push(<option key={item} value={products[item].itemCategory.toLowerCase()}>{products[item].itemCategory}</option>);
-            keys.push(products[item].itemCategory);
-            }
-        }
-        setCategoryData(localData);
-        console.log(categoryData);
-    })
-        //fetch call
-        },[])
-
-
-// const handleItemCategory = (id)=>{
-//
-//
-// }
-//         const handleItemCategory = (category) => {
-//         console.log(category);
-// //          let localData=[];
-// //
-// //         let dt = products.filter(x => x.itemCategory === category);
-// //         for(let item in dt){
-// //             localData.push(<option key={item} value={dt[item].itemMake.toLowerCase()}>{dt[item].itemMake}</option>);
-// //
-// //
-// //         setMakeData(localData);
-//
-// }
-
-// useEffect(()=>{
-//
-//
-// })
-// const handleSample =(id) =>
-//
-// {
-// console.log("hello");
-// //let dt = products.filter(x => x.itemCategory === id);
-//
-//
-// }
-
-
-// const { register, watch } = useForm();
-//   const title = watch('itemCategory');
-
-
-=======
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
-  GET_ALL_ITEMS_URL,
-  getRequestHeaders,
+  APPLY_LOAN_URL,
+  getJsonPostRequestData,
 } from "../../Services/ApiService";
 
-export const ApplyLoan = (props) => {
-  //   const ItemCategories = [{id:'1', name:'Furniture'},{id:'2', name:'Crockery'}];
-  //
-  //   const products = [
-  //       {id:"1",itemCategoryID:"1",name:"chair"},
-  //       {id:"2",itemCategoryID:"1",name:"chair 2"},
-  //       {id:"3",itemCategoryID:"2",name:"chair 3"},
-  //       {id:"4",itemCategoryID:"2",name:"chair 4"},
-  //       {id:"1",itemCategoryID:"3",name:"chair 5"},
-  //       {id:"2",itemCategoryID:"3",name:"chair 6 "},
-  //       {id:"3",itemCategoryID:"4",name:"chair 7"},
-  //       {id:"4",itemCategoryID:"4",name:"chair 8"}
-  //     ]
+export function ApplyLoan(props) {
+  let [categoryData, setCategoryData] = useState([]);
+  let [itemName, setItemName] = useState([]);
+  let [itemsData, setItemsData] = useState([]);
+  let [final, setFinal] = useState("");
 
-  //     const itemValues = [
-  //         {id:"1",productID:"1",name:"Faridabad"},
-  //         {id:"2",productID:"1",name:"Palwal"},
-  //         {id:"3",productID:"2",name:"Mandi House"},
-  //         {id:"4",productID:"2",name:"kalka Ji"},
-  //         {id:"1",productID:"3",name:"Houston"},
-  //         {id:"2",productID:"3",name:"Austin"},
-  //         {id:"3",productID:"4",name:"Los Angeles"},
-  //         {id:"4",productID:"4",name:"Son Diego"}
-  //       ]
-  //
-  //       const itemDescriptions = [
-  //                                        {id:"1",productID:"1",name:"Faridabad"},
-  //                                        {id:"2",productID:"1",name:"Palwal"},
-  //                                        {id:"3",productID:"2",name:"Mandi House"},
-  //                                        {id:"4",productID:"2",name:"kalka Ji"},
-  //                                        {id:"1",productID:"3",name:"Houston"},
-  //                                        {id:"2",productID:"3",name:"Austin"},
-  //                                        {id:"3",productID:"4",name:"Los Angeles"},
-  //                                        {id:"4",productID:"4",name:"Son Diego"}
-  //                                      ]
-  //
-  // const[afewItem, setafewItem] =useState([]);
-  // const [ product, setProduct] = useState([]);
-  //   const [itemDescription, setItemDescription] = useState("");
-  //const [itemCategory, setItemCategory] = useState("");
-  
-  const [categoryData, setCategoryData] = useState([]);
-  const [makeData, setMakeData] = useState([]);
-  const [itemsData, setItemsData] = useState([]);
-  //   const [itemMake, setItemMake] = useState("Ceramic");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    getValues,
+    resetField,
+    formState: { errors, isValid },
+  } = useForm({ criteriaMode: "all" });
 
-  // useEffect(()=>{
-  //     setItemCategory(ItemCategories);
-  //   },[])
-  //
-  //
-  //   useEffect(()=>{
-  //       setafewItem(afewItems);
-  //     },[])
+  const navigate = useNavigate();
+  const onSubmit = async (data) => {
+    // console.log(data);
 
-  //
-  //     const handleProduct = (id) => {
-  //         const dt = itemValues.filter(x => x.productID === id);
-  //         const dt2 = itemDescriptions.filter(x => x.productID === id);
-  //         setItemValue(dt);
-  //         setItemDescription(dt2);
-  //       }
-
-  //   const onApplyLoanSubmitHandler = (e) => {
-  //     e.preventDefault();
-  //     let applyLoanFormData = {
-  //       employeeId: props.authorizedLogin,
-  //       itemValue: itemValue,
-  //       itemCategory: itemCategory,
-  //       itemMake: itemMake,
-  //       itemDescription: itemDescription,
-  //     };}
-  //
-  //     console.log(applyLoanFormData);
-
-  const [products, setProducts] = useState([]);
-  //CHNAGE EMPLOYEEID NKCKCD
-  useEffect(() => {
-    console.log(props.authorizedLogin, "ello");
-    //console.log(emp);
-    fetch(GET_ALL_ITEMS_URL, getRequestHeaders()).then((res) => 
-       res.json())
-      .then( (products) => {
-      console.log(products, "Umaaaaaa");
-      let localData = [];
-      let keys = [];
-      for (let index in products) {
-        // if (!keys.includes(products[item].itemCategory)) {
-        //   localData.push(
-        //     <option
-        //       key={item}
-        //       value={products[item].itemCategory.toLowerCase()}
-        //     >
-        //       {products[item].itemCategory}
-        //     </option>
-        //   );
-        //   keys.push(products[item].itemCategory);
-        // }
-        // console.log(products[index].itemCategory, "cat");
-        if(!keys.includes(products[index].itemCategory)){
-          keys.push(products[index].itemCategory)
+    let applyLoanrequest = {
+      itemCategory: data.itemcategory,
+      itemId: final,
+      employeeId: props.authorizedLogin.employeeid,
+    };
+    // console.log(applyLoanrequest);
+    fetch(APPLY_LOAN_URL, getJsonPostRequestData(applyLoanrequest))
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+        if(resp){
+          navigate("/viewLoans");
+        }else{
+          navigate("/error");
         }
-        
+      });
+  };
+
+  const onError = () => {
+    navigate("*");
+  };
+  const watchmakeandcategory = watch(["itemmake", "itemcategory"]);
+
+  let disableExpression =
+    !isValid ||
+    !watchmakeandcategory[0] ||
+    watchmakeandcategory[0] === "" ||
+    !watchmakeandcategory[1] ||
+    watchmakeandcategory[1] === ""; //|| !updateCheck;
+  useEffect(() => {
+    Axios.get("http://localhost:8080/api/v1/getAllItems").then((res) => {
+      // console.log(res.data);
+      // // setValue("employeeid", sessionStorage.getItem("username"));
+      let data = res.data;
+      let localCatData = [];
+      let keys = [];
+      for (let item in data) {
+        if (!keys.includes(data[item].itemCategory)) {
+          localCatData.push(
+            <option key={item} value={data[item].itemCategory}>
+              {data[item].itemCategory}
+            </option>
+          );
+          keys.push(data[item].itemCategory);
+        }
       }
-      setCategoryData(keys);
-        console.log(categoryData, "catergory");
+      setCategoryData(localCatData);
+      setItemsData(data);
+      // console.log(categoryData, itemsData);
     });
-    //fetch call
   }, []);
 
-  // const handleItemCategory = (id)=>{
-  //
-  //
-  // }
-  //         const handleItemCategory = (category) => {
-  //         console.log(category);
-  // //          let localData=[];
-  // //
-  // //         let dt = products.filter(x => x.itemCategory === category);
-  // //         for(let item in dt){
-  // //             localData.push(<option key={item} value={dt[item].itemMake.toLowerCase()}>{dt[item].itemMake}</option>);
-  // //
-  // //
-  // //         setMakeData(localData);
-  //
-  // }
->>>>>>> 0e62296973db258de229ad82034fa14c4dc3a103
+  useEffect(() => {
+    resetField("itemname");
+    let presentCategory = watch("itemcategory");
+    let data = itemsData.filter((val) => presentCategory === val.itemCategory);
+    let localNameData = [];
+    for (let item in data) {
+      localNameData.push(
+        <option key={data[item].itemName}>{data[item].itemName}</option>
+      );
+    }
+    setItemName(localNameData);
+  }, [watch("itemcategory")]);
+
+  useEffect(() => {
+    resetField("itemmake");
+    resetField("itemvalue");
+    resetField("itemdescription");
+    let choice = itemsData.filter(
+      (val) =>
+        val.itemCategory === getValues("itemcategory") &&
+        val.itemName === getValues("itemname")
+    );
+    setFinal(choice[0]?.itemId);
+    setValue("itemmake", choice[0]?.itemMake);
+    setValue("itemvalue", choice[0]?.itemValuation);
+    setValue("itemdescription", choice[0]?.itemDescription);
+  }, watch(["itemname"]));
 
   return (
-    <div>
-      <div className="container my-3">
-        <h2>Loan Management Application</h2>
-        <h3>Apply Loan</h3>
-      </div>
-      <div className="outer">
-        <div className="card w-45">
-          <div className="card-body">
-            <form>
-              <div className="mb-3">
-                <label htmlFor="ememployeeId" className="form-label">
-                  Employee Id
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="text"
-                  name="employeeId"
-                  value={props.authorizedLogin.employeeid}
-                  disabled
-                  {...register('employeeid',{required: 'employeeid is required'})}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="itemCategory" className="form-label">
-                  Item Category
-                </label>
-                <select
-                  id="itemCategory"
-                  className="form-select form-select-sm"
-                  aria-label=".form-select-lg example"
-                  name="itemCategory"
-<<<<<<< HEAD
-               onChange={(e)=>{ setCategoryDataChoice(e.target.value)
-               console.log(categoryDataChoice)}}
-               {...register('itemCategory',{required: 'select an option'})}
+    <div className="outer">
+      <div className="card" style={{ width: "400px" }}>
+        <div className="card-body">
+          <h3 className="card-title text-center">Apply Loan</h3>
 
-                >
-
-                <option value="1">Hello</option>
-                <option value="0">Select Category</option>
+          <form className={"form"} onSubmit={handleSubmit(onSubmit, onError)}>
+            <div className="mb-3">
+              <label htmlFor={"employeeid"}>Employee id </label>
+              <input
+                className={"form-control"}
+                placeholder={"Ex: E12345"}
+                type={"text"}
+                id={"employeeid"}
+                disabled
+                value={props.authorizedLogin.employeeid}
+              />
+              {errors.employeeid && (
+                <small color={"red"}>{errors.employeeid.message}</small>
+              )}
+            </div>
+            <div className="mb-3">
+              <label htmlFor={"itemcategory"} className="form-label">
+                Item Category
+              </label>
+              <select
+                className={"form-control"}
+                id={"itemcategory"}
+                defaultValue={"/"}
+                {...register("itemcategory", {
+                  required: "Select one of the option",
+                })}
+              >
+                <option value={""}>Select</option>
                 {categoryData}
+              </select>
+              {errors.itemcategory}
+            </div>
 
+            <div className="mb-3">
+              <label htmlFor={"itemname"}>Item Name</label>
+              <select
+                className={"form-control"}
+                defaultValue={""}
+                {...register("itemname")}
+              >
+                <option value={""}>Select Item Name</option>
+                {itemName}
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor={"itemmake"}>Item Make</label>
+              <input
+                className={"form-control"}
+                placeholder={"Ex: Glass"}
+                type={"text"}
+                id={"itemmake"}
+                disabled
+                {...register("itemmake", { required: true })}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor={"itemvalue"}>Item Value</label>
+              <input
+                className={"form-control"}
+                placeholder={"Ex: 10000"}
+                type={"number"}
+                id={"itemvalue"}
+                disabled
+                {...register("itemvalue", { required: true })}
+              />
+            </div>
 
-{/*                      { */}
-{/*                                              afewItem && */}
-{/*                                              afewItem !== undefined ? */}
-{/*                                              afewItem.map((ctr,index) => { */}
-{/*                                                  return( */}
+            <div className="mb-3">
+              <label htmlFor={"itemdescription"}>Item Description</label>
+              <input
+                className={"form-control"}
+                placeholder={"Ex: Tea Table"}
+                type={"text"}
+                id={"itemdescription"}
+                {...register("itemdescription", { required: true })}
+                disabled
+              />
+            </div>
 
-{/*                                                  <option key={index} value={ctr.itemCategory}>{ctr.itemCategory}</option> */}
-
-{/*                                                  ) */}
-{/*                                              }) */}
-{/*                                              :"No Category" */}
-
-{/*                                            } */}
-=======
-                  // onChange={(e)=>console.log(e.target.value)}
-                >
-                  <option value="1">Hello</option>
-                  <option value="0">Select Category</option>
-                  {categoryData}
-
-                  {/*                      { */}
-                  {/*                                              afewItem && */}
-                  {/*                                              afewItem !== undefined ? */}
-                  {/*                                              afewItem.map((ctr,index) => { */}
-                  {/*                                                  return( */}
->>>>>>> 0e62296973db258de229ad82034fa14c4dc3a103
-
-                  {/*                                                  <option key={index} value={ctr.itemCategory}>{ctr.itemCategory}</option> */}
-
-                  {/*                                                  ) */}
-                  {/*                                              }) */}
-                  {/*                                              :"No Category" */}
-
-                  {/*                                            } */}
-                </select>
-              </div>
-              <div className="mb-3">
-<<<<<<< HEAD
-                              <label htmlFor="itemMake" className="form-label">
-                                Product
-                              </label>
-                              <select
-                              id="ddlProducts"
-                                className="form-select form-select-sm"
-                                aria-label=".form-select-lg example"
-
-                                name="itemMake"
-                                htmlFor="itemMake"
-                                {...register('itemMake',{required: 'select an option'})}
-                              >
-                                <option value="0">Select Product</option>
-
-
-{/*                                       { */}
-{/*                                         product && */}
-{/*                                         product !== undefined ? */}
-{/*                                         product.map((ctr,index) => { */}
-{/*                                             return( */}
-{/*                                                 <option key={index} value={ctr.id}>{ctr.name}</option> */}
-{/*                                             ) */}
-{/*                                         }) */}
-{/*                                         :"No Product" */}
-
-{/*                                       } */}
-                              </select>
-                            </div>
-=======
-                <label htmlFor="itemMake" className="form-label">
-                  Product
-                </label>
-                <select
-                  id="ddlProducts"
-                  className="form-select form-select-sm"
-                  aria-label=".form-select-lg example"
-                  name="itemMake"
-                  htmlFor="itemMake"
-                  required
-                >
-                  <option value="0">Select Product</option>
-
-                  {/*                                       { */}
-                  {/*                                         product && */}
-                  {/*                                         product !== undefined ? */}
-                  {/*                                         product.map((ctr,index) => { */}
-                  {/*                                             return( */}
-                  {/*                                                 <option key={index} value={ctr.id}>{ctr.name}</option> */}
-                  {/*                                             ) */}
-                  {/*                                         }) */}
-                  {/*                                         :"No Product" */}
-
-                  {/*                                       } */}
-                </select>
-              </div>
->>>>>>> 0e62296973db258de229ad82034fa14c4dc3a103
-              <div className="mb-3">
-                <label htmlFor="itemDescription" className="form-label">
-                  Item Description
-                </label>
-                <div className="form-control">
-                  {/*                                                            itemDescription && */}
-                  {/*                                                            itemDescription !== undefined ? */}
-                  {/*                                                            itemDescription.map((ctr,index) => { */}
-                  {/*                                                                return( */}
-                  {/*                                                                <p key={index} value={ctr.id}>{ctr.name}</p> */}
-
-                  {/*                                                                ) */}
-                  {/*                                                            }) */}
-                  {/*                                                            :"No Item Description" */}
-
-                  {/*                                                          } */}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="itemValue" className="form-label">
-                  Item Value
-                </label>
-                <div className="form-control">
-                  {/*                                                                            itemValue && */}
-                  {/*                                                                            itemValue !== undefined ? */}
-                  {/*                                                                            itemValue.map((ctr,index) => { */}
-                  {/*                                                                                return( */}
-                  {/*                                                                                <p key={index} value={ctr.id}>{ctr.name}</p> */}
-
-                  {/*                                                                                ) */}
-                  {/*                                                                            }) */}
-                  {/*                                                                            :"No Item Value" */}
-
-                  {/*                                                                          } */}
-                </div>
-              </div>
-
-              <button type="submit" className="btn btn-primary mx-auto">
-                Apply Loan
-              </button>
-            </form>
-          </div>
+            <button
+              className={"mt-2 btn btn-primary"}
+              disabled={disableExpression}
+              type={"submit"}
+            >
+              Apply Loan
+            </button>
+          </form>
         </div>
       </div>
     </div>
   );
-};
+}

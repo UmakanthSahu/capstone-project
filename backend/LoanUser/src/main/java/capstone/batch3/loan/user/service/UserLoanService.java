@@ -3,7 +3,6 @@ package capstone.batch3.loan.user.service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -36,7 +35,8 @@ public class UserLoanService {
 	// returns all the availed Loans based on employeeId
 	public List<ViewLoansResponse> getLoans(Integer employeeId) {
 
-		return employeeCardDetailsRepository.getActiveLoans(employeeId).stream()
+		return employeeCardDetailsRepository.getActiveLoans(employeeId)
+				.stream()
 				.map(details -> new ViewLoansResponse(details.getEmployeeCardDetailsId().getLoanCardMaster(),
 						details.getCardIssueDate()))
 				.collect(Collectors.toList());
@@ -52,8 +52,10 @@ public class UserLoanService {
 		List<LoanCardMaster> loans = loanCardMasterRepository.findByCategory(applyLoanRequest.getItemCategory());
 
 		// get any loan card which is not availed yet
-		LoanCardMaster unavailedLoanCard = loans.stream().filter(loan -> loan.getEmployeeLoanCards().size() == 0)
-				.findFirst().orElse(null);
+		LoanCardMaster unavailedLoanCard = loans.stream()
+				.filter(loan -> loan.getEmployeeLoanCards().size() == 0)
+				.findFirst()
+				.orElse(null);
 
 		// todays date to insert for loan application date
 		Date today = Date.valueOf(LocalDate.now());

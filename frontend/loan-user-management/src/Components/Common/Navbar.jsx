@@ -17,7 +17,7 @@ export const Navbar = (props) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-        <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
@@ -36,22 +36,26 @@ export const Navbar = (props) => {
               </>
             ) : (
               <>
-
                 <li className="nav-item">
-                                  <Link className="nav-link" to="/itemsPurchased">
-                                    Items Purchased
-                                  </Link>
-                                </li>
-                                <li className="nav-item">
-                                                  <Link className="nav-link" to="/viewLoans">
-                                                    View Loans
-                                                  </Link>
-                                                </li>
-                                                <li className="nav-item">
-                                                                  <Link className="nav-link" to="/applyLoan">
-                                                                   Apply Loans
-                                                                  </Link>
-                                                                </li>
+                  <Link className="nav-link" to="/dashboard">
+                    Dashboard
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/itemsPurchased">
+                    Items Purchased
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/viewLoans">
+                    View Loans
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/applyLoan">
+                    Apply Loans
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" onClick={props.logoutHandler}>
                     Logout

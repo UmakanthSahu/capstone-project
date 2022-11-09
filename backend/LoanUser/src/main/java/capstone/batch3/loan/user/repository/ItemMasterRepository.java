@@ -10,6 +10,6 @@ import capstone.batch3.loan.user.model.ItemMaster;
  */
 
 @Repository
-public interface ItemRepository extends JpaRepository<ItemMaster, Integer> {
+public interface ItemMasterRepository extends JpaRepository<ItemMaster, Integer> {
 
 }

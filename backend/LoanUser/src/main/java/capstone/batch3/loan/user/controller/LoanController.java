@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import capstone.batch3.loan.user.model.EmployeeCardDetails;
 import capstone.batch3.loan.user.model.request.ApplyLoanRequest;
 import capstone.batch3.loan.user.model.request.EmployeeIdRequest;
 import capstone.batch3.loan.user.model.response.ViewLoansResponse;

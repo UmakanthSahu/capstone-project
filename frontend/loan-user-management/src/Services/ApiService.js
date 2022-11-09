@@ -8,20 +8,20 @@ export const getJsonPostRequestData = (data) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   };
 };
 export const getRequestHeaders = () => {
   return {
     method: "GET",
     headers: {
-      "Access-Control-Allow-Origin": "*"
-    }
+      "Access-Control-Allow-Origin": "*",
+    },
   };
 };
 
 export const getLoginUrl = (username, password) => {
-  return BASE_API_URL +"loginEmployee/" + username + "/" + password;
+  return BASE_API_URL + "loginEmployee/" + username + "/" + password;
 };
