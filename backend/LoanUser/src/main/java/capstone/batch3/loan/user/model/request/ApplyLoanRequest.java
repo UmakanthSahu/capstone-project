@@ -1,10 +1,13 @@
 package capstone.batch3.loan.user.model.request;
 
+/*
+ * Converts the JSON request for ApplyingLoan into Java POJO class
+ */
+
 public class ApplyLoanRequest {
 	private int employeeId;
 	private int itemId;
 	private String itemCategory;
-	
 
 	public String getItemCategory() {
 		return itemCategory;
@@ -30,5 +33,4 @@ public class ApplyLoanRequest {
 		this.employeeId = employeeId;
 	}
 
-	
 }

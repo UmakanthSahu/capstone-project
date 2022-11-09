@@ -19,7 +19,7 @@ public class LoanCardMaster {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loanId;
 
-	@Column(name = "loan_type")
+	@Column(name = "loan_type", length = 15)
 	private String loanType;
 
 	@Column(name = "duration_in_years")

@@ -6,13 +6,16 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import capstone.batch3.loan.user.model.EmployeeIssueDetails;
 
-public interface EmployeeIssueDetailsRepository extends JpaRepository<EmployeeIssueDetails, Integer> {
+/*
+ * Repository for EmployeeIssueDetails Table
+ */
 
-//	@Query("")
-//	public List<ItemMaster> getItemsPurchased(Integer employeeId);
+@Repository
+public interface EmployeeIssueDetailsRepository extends JpaRepository<EmployeeIssueDetails, Integer> {
 	
 	@Query("FROM EmployeeIssueDetails where employee_id=?1")
 	public List<EmployeeIssueDetails> findByEmployeeId(Integer employeeId);

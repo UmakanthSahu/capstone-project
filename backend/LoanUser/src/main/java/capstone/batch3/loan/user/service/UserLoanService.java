@@ -17,6 +17,9 @@ import capstone.batch3.loan.user.repository.EmployeeCardDetailsRepository;
 import capstone.batch3.loan.user.repository.EmployeeIssueDetailsRepository;
 import capstone.batch3.loan.user.repository.LoanCardMasterRepository;
 
+/*
+ * handles applying Loan and getAllAvailedLoans
+ */
 @Service
 public class UserLoanService {
 
@@ -25,10 +28,11 @@ public class UserLoanService {
 
 	@Autowired
 	private LoanCardMasterRepository loanCardMasterRepository;
-	
+
 	@Autowired
 	private EmployeeIssueDetailsRepository employeeIssueDetailsRepository;
 
+	// returns all the availed Loans based on employeeId
 	public List<ViewLoansResponse> getLoans(Integer employeeId) {
 
 		return employeeCardDetailsRepository.getActiveLoans(employeeId).stream()
@@ -37,26 +41,35 @@ public class UserLoanService {
 				.toList();
 	}
 
+	/*
+	 * returns boolean value representing success or failure
+	 */
 	@Transactional
-	public void applyLoan(ApplyLoanRequest applyLoanRequest) {
+	public boolean applyLoan(ApplyLoanRequest applyLoanRequest) {
+
+		// get all the loan cards based on category from LoanCardMaster table
 		List<LoanCardMaster> loans = loanCardMasterRepository.findByCategory(applyLoanRequest.getItemCategory());
 
-		loans.forEach(loan -> {
-			System.out.println(loan.getLoanId() + " " + loan.getEmployeeLoanCards().size());
-			System.out.println(loan.getEmployeeLoanCards());
-		});
+		// get any loan card which is not availed yet
+		LoanCardMaster unavailedLoanCard = loans.stream().filter(loan -> loan.getEmployeeLoanCards().size() == 0)
+				.findFirst().orElse(null);
 
-		Optional<LoanCardMaster> unusedLoanCard = loans.stream().filter(loan -> loan.getEmployeeLoanCards().size() == 0)
-				.findFirst();
-		
+		// todays date to insert for loan application date
 		Date today = Date.valueOf(LocalDate.now());
 
-		if (unusedLoanCard.isPresent()) {
-			LoanCardMaster unusedLoanCardMaster = unusedLoanCard.get();
-			employeeCardDetailsRepository.insertRecord(applyLoanRequest.getEmployeeId(),
-					unusedLoanCardMaster.getLoanId(), today);
+		// if there is any unavailed loan card then insert in EmployeeIssueDetails
+		// tables with Activated else Rejected
+		employeeIssueDetailsRepository.insertRecord(today, unavailedLoanCard == null ? "Rejected" : "Active",
+				applyLoanRequest.getEmployeeId(), applyLoanRequest.getItemId());
+
+		// if there is any availed loanCard then insert a record in EmployeeCardDetails
+		// stating that its availed
+		if (unavailedLoanCard != null) {
+			employeeCardDetailsRepository.insertRecord(applyLoanRequest.getEmployeeId(), unavailedLoanCard.getLoanId(),
+					today);
+			return true;
 		}
-		
-		employeeIssueDetailsRepository.insertRecord(today, unusedLoanCard.isEmpty() ? "Rejected" : "Active", applyLoanRequest.getEmployeeId(), applyLoanRequest.getItemId());
+
+		return false;
 	}
 }

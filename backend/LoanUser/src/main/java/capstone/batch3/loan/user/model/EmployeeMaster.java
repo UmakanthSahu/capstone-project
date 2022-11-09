@@ -14,19 +14,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Entity
 @Table(name = "employee_master")
 public class EmployeeMaster {
+
 	@Id
 	@Column(name = "employee_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employeeId;
 
-	@Column(name = "employee_name", nullable = false, length = 40)
+	@Column(name = "employee_name", nullable = false, length = 20)
 	@NotBlank
-	@Pattern(regexp = "^[A-Za-z\\s]{2,40}$", message = "Invalid Name")
+	@Pattern(regexp = "^[A-Za-z\\s]{2,20}$", message = "Invalid Name")
 	private String name;
 
 	@Column(nullable = false, length = 25)
@@ -44,21 +43,18 @@ public class EmployeeMaster {
 			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Invalid Email Address")
 	private String emailId;
 
-
 	@Column
 	private Date dateOfBirth;
 
 	@Column
 	private Date dateOfJoining;
-	
+
 	@OneToMany(mappedBy = "employeeCardDetailsId.employeeMaster")
-	private List<EmployeeCardDetails> employeeLoanCards =  new ArrayList<EmployeeCardDetails>();
-	
+	private List<EmployeeCardDetails> employeeLoanCards = new ArrayList<EmployeeCardDetails>();
+
 	@OneToMany(mappedBy = "employeeMaster")
 	private List<EmployeeIssueDetails> employeeIssues = new ArrayList<EmployeeIssueDetails>();
-	
 
-	
 	public List<EmployeeIssueDetails> getEmployeeIssues() {
 		return employeeIssues;
 	}
@@ -67,7 +63,6 @@ public class EmployeeMaster {
 		this.employeeIssues = employeeIssues;
 	}
 
-	
 	public List<EmployeeCardDetails> getEmployeeLoanCards() {
 		return employeeLoanCards;
 	}
@@ -75,8 +70,6 @@ public class EmployeeMaster {
 	public void setEmployeeLoanCards(List<EmployeeCardDetails> employeeLoanCards) {
 		this.employeeLoanCards = employeeLoanCards;
 	}
-
-	
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -125,7 +118,6 @@ public class EmployeeMaster {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-
 
 	public Date getDateOfBirth() {
 		return dateOfBirth;

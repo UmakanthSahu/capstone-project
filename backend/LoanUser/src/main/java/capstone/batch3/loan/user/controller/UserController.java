@@ -18,6 +18,9 @@ import capstone.batch3.loan.user.model.response.EmployeeLoginResponse;
 import capstone.batch3.loan.user.pojo.ResponseHeader;
 import capstone.batch3.loan.user.service.EmployeeService;
 
+/*
+ * Handles loginEmployee get request
+ */
 @CrossOrigin(origins = {"http://localhost:3000",  "http://localhost:3001", "http://localhost:3002"})
 @RestController
 @RequestMapping("/api/v1")
@@ -36,6 +39,8 @@ public class UserController {
 		return res;
 	}
 
+	// returns Http 200 status code - OK on successful login
+	// returns Http 401 status code - UNAUTHORIZED on Invalid Credentials
 	@GetMapping(path = "/loginEmployee/{email}/{password}")
 	public ResponseEntity<?> login(@PathVariable String email, @PathVariable String password) {
 		EmployeeLoginResponse employeeLoginResponse = employeeService.login(email, password);

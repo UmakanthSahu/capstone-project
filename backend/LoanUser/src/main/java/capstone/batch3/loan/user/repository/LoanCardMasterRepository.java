@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import capstone.batch3.loan.user.model.LoanCardMaster;
 
+/*
+ * Repository for LoanCardMaster Table
+ */
+
 @Repository
 public interface LoanCardMasterRepository extends JpaRepository<LoanCardMaster, Integer> {
 

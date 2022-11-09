@@ -2,7 +2,11 @@ package capstone.batch3.loan.user.model.response;
 
 import capstone.batch3.loan.user.model.ItemMaster;
 
-public class PurchasedItemResponse extends ItemMaster{
+/*
+ * Response Java POJO class for Purchased Items
+ */
+
+public class PurchasedItemResponse extends ItemMaster {
 
 	private int issueId;
 
@@ -23,8 +27,5 @@ public class PurchasedItemResponse extends ItemMaster{
 	public void setIssueId(int issueId) {
 		this.issueId = issueId;
 	}
-	
 
-	
-	
 }

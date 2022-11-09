@@ -2,16 +2,19 @@ package capstone.batch3.loan.user.model.response;
 
 import capstone.batch3.loan.user.model.EmployeeMaster;
 
+/*
+ * On Successful login employeeId, Designation and Department are returned as response
+ */
 public class EmployeeLoginResponse {
 
 	private int employeeId;
 	private String employeeDesignation;
-	private String department;
-	
+	private String employeeDepartment;
+
 	public EmployeeLoginResponse(EmployeeMaster employeeMaster) {
 		this.employeeId = employeeMaster.getEmployeeId();
-		this.employeeDesignation  = employeeMaster.getDesignation();
-		this.department = employeeMaster.getDepartment();
+		this.employeeDesignation = employeeMaster.getDesignation();
+		this.employeeDepartment = employeeMaster.getDepartment();
 	}
 
 	public int getEmployeeid() {
@@ -31,11 +34,11 @@ public class EmployeeLoginResponse {
 	}
 
 	public String getDepartment() {
-		return department;
+		return employeeDepartment;
 	}
 
 	public void setDepartment(String department) {
-		this.department = department;
+		this.employeeDepartment = department;
 	}
 
 }
