@@ -1,6 +1,7 @@
 package capstone.batch3.loan.user.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class ItemService {
 
 	public List<PurchasedItemResponse> getPurchasedItems(Integer employeeId) {
 		return employeeIssueDetailsRepository.findByEmployeeId(employeeId).stream()
-				.map(item -> new PurchasedItemResponse(item.getIssueId(), item.getItemMaster())).toList();
+				.map(item -> new PurchasedItemResponse(item.getIssueId(), item.getItemMaster())).collect(Collectors.toList());
 	}
 
 }

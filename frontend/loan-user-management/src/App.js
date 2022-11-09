@@ -15,20 +15,18 @@ function App() {
     sessionStorage.getItem("authorizedLogin");
     
   // when user is logged in, this state contains the employeeId
-  const [authorizedLogin, setAuthorizedLogin] = useState(
-    authorizedLoginFromLocalStorage === null
-      ? ""
-      : authorizedLoginFromLocalStorage
-  );
+  const [authorizedLogin, setAuthorizedLogin] = useState(authorizedLoginFromLocalStorage===null?null:JSON.parse(authorizedLoginFromLocalStorage));
   const navigate = useNavigate();
 
   function isUserLoggedIn() {
-   return authorizedLogin !== "";
+  //console.log(authorizedLogin);
+   return authorizedLogin !== null;
   }
 
   useEffect(() => {
     // console.log(authorizedLoginFromLocalStorage);
-    sessionStorage.setItem("authorizedLogin", authorizedLogin);
+
+    sessionStorage.setItem("authorizedLogin", authorizedLogin===null || authorizedLogin===""?null:JSON.stringify(authorizedLogin));
 
     return () => sessionStorage.removeItem("authorizedLogin");
   }, [authorizedLogin]);
@@ -37,7 +35,7 @@ function App() {
   const logoutHandler = (event) => {
     event.preventDefault();
     if (window.confirm("Are you sure want to logout?")) {
-      setAuthorizedLogin("");
+      setAuthorizedLogin(null);
       navigate("/logoutSuccess");
     }
   };
