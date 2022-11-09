@@ -5,9 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import capstone.batch3.loan.user.model.ItemMaster;
 
+/*
+ * Repository for EmployeeCardDetails Table
+ */
+
 @Repository
 public interface ItemRepository extends JpaRepository<ItemMaster, Integer> {
-	
-	
 
 }

@@ -5,6 +5,10 @@ import java.time.LocalDate;
 
 import capstone.batch3.loan.user.model.LoanCardMaster;
 
+/*
+ * Response Java POJO class for ViewLoans
+ */
+
 public class ViewLoansResponse {
 
 	private int loanId;

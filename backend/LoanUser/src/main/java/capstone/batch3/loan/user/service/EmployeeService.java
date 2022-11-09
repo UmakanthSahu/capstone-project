@@ -9,6 +9,10 @@ import capstone.batch3.loan.user.model.EmployeeMaster;
 import capstone.batch3.loan.user.model.response.EmployeeLoginResponse;
 import capstone.batch3.loan.user.repository.EmployeeRepository;
 
+/*
+ * Service class to handle employeeLogin
+ */
+
 @Service
 public class EmployeeService {
 
@@ -33,17 +37,5 @@ public class EmployeeService {
 	private boolean existsById(EmployeeMaster employee) {
 		return employeeRepository.existsById(employee.getEmailId());
 	}
-
-//	private boolean addItemToLoanCard(LoanCard loanCard, ItemMaster it) {
-//		if (it.getIssueStatus() == ItemIssueStatus.NOTISSUED) {
-//			it.setIssueStatus(ItemIssueStatus.ISSUED);
-//			loanCard.addNewItems(it);
-//			double temp = loanCard.getLoan_val() + it.getValue();
-//			loanCard.setLoan_val(temp);
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
 
 }

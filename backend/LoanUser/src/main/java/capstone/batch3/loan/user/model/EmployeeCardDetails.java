@@ -6,14 +6,13 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee_card_details")
-
 public class EmployeeCardDetails implements Serializable {
 
+	private static final long serialVersionUID = -1710346470857160400L;
 
 	@EmbeddedId
 	private EmployeeCardDetailsId employeeCardDetailsId;
@@ -36,13 +35,5 @@ public class EmployeeCardDetails implements Serializable {
 	public void setEmployeeCardDetailsId(EmployeeCardDetailsId employeeCardDetailsId) {
 		this.employeeCardDetailsId = employeeCardDetailsId;
 	}
-
-	@Override
-	public String toString() {
-		return "EmployeeCardDetails [employeeCardDetailsId=" + employeeCardDetailsId.getEmployeeMaster().getEmployeeId() +"--"+ employeeCardDetailsId.getLoanCardMaster().getLoanId() + ", cardIssueDate="
-				+ cardIssueDate + "]";
-	}
-	
-	
 
 }

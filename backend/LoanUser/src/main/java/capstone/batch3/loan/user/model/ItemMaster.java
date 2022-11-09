@@ -20,20 +20,16 @@ public class ItemMaster {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int itemId;
 
-	@Column(name = "item_description")
+	@Column(name = "item_description", length = 40)
 	private String itemDescription;
 
-	@Column(name = "item_make")
+	@Column(name = "item_make", length = 25)
 	private String itemMake;
-	
-	@Column(name = "item_name")
+
+	@Column(name = "item_name", length = 30)
 	private String itemName;
-	
-	
 
-	
-
-	@Column(name = "item_category")
+	@Column(name = "item_category", length = 20)
 	private String itemCategory;
 
 	@Column(name = "item_valuation")
@@ -42,7 +38,6 @@ public class ItemMaster {
 	@OneToMany(mappedBy = "itemMaster")
 	private List<EmployeeIssueDetails> employeeIssueDetails = new ArrayList<EmployeeIssueDetails>();
 
-	
 	public String getItemName() {
 		return itemName;
 	}
@@ -59,7 +54,6 @@ public class ItemMaster {
 //	public void setEmployeeIssueDetails(List<EmployeeIssueDetails> employeeIssueDetails) {
 //		this.employeeIssueDetails = employeeIssueDetails;
 //	}
-	
 
 	public int getItemId() {
 		return itemId;

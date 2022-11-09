@@ -7,26 +7,35 @@ import { Login } from "./Components/User/Login";
 import { ApplyLoan } from "./Components/User/ApplyLoan";
 import { Dashboard } from "./Components/User/Dashboard";
 import { ViewLoans } from "./Components/User/ViewLoans";
-import { ItemsPurchased} from "./Components/User/ItemsPurchased";
+import { ItemsPurchased } from "./Components/User/ItemsPurchased";
 import { LogoutSuccess } from "./Components/User/LogoutSuccess";
 
 function App() {
-  const authorizedLoginFromLocalStorage =
+  const authorizedLoginFromSessionStorage =
     sessionStorage.getItem("authorizedLogin");
-    
+
   // when user is logged in, this state contains the employeeId
-  const [authorizedLogin, setAuthorizedLogin] = useState(authorizedLoginFromLocalStorage===null?null:JSON.parse(authorizedLoginFromLocalStorage));
+  const [authorizedLogin, setAuthorizedLogin] = useState(
+    authorizedLoginFromSessionStorage === null
+      ? null
+      : JSON.parse(authorizedLoginFromSessionStorage)
+  );
   const navigate = useNavigate();
 
   function isUserLoggedIn() {
-  //console.log(authorizedLogin);
-   return authorizedLogin !== null;
+    //console.log(authorizedLogin);
+    return authorizedLogin !== null;
   }
 
   useEffect(() => {
-    // console.log(authorizedLoginFromLocalStorage);
+    // console.log(authorizedLoginFromSessionStorage);
 
-    sessionStorage.setItem("authorizedLogin", authorizedLogin===null || authorizedLogin===""?null:JSON.stringify(authorizedLogin));
+    sessionStorage.setItem(
+      "authorizedLogin",
+      authorizedLogin === null || authorizedLogin === ""
+        ? null
+        : JSON.stringify(authorizedLogin)
+    );
 
     return () => sessionStorage.removeItem("authorizedLogin");
   }, [authorizedLogin]);
@@ -39,8 +48,6 @@ function App() {
       navigate("/logoutSuccess");
     }
   };
-
-
 
   return (
     <div className="App">
@@ -62,21 +69,57 @@ function App() {
             exact
             path="/dashboard"
             element={
-              isUserLoggedIn() ?
-              <Dashboard
-                authorizedLogin={authorizedLogin}
-                setAuthorizedLogin={setAuthorizedLogin}
-                logoutHandler={logoutHandler}
-                navigate={navigate}
-                
-              /> : <Navigate to="/login" />
+              isUserLoggedIn() ? (
+                <Dashboard
+                  authorizedLogin={authorizedLogin}
+                  setAuthorizedLogin={setAuthorizedLogin}
+                  logoutHandler={logoutHandler}
+                  navigate={navigate}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
-          <Route exact path="/applyLoan" element={ isUserLoggedIn() ? <ApplyLoan authorizedLogin = {authorizedLogin}  />: <Navigate to="/login" /> } />
-          <Route exact path="/viewLoans" element={isUserLoggedIn() ?<ViewLoans authorizedLogin = {authorizedLogin} /> : <Navigate to="/login"/>} />
-          <Route exact path="/itemsPurchased" element={isUserLoggedIn() ? <ItemsPurchased authorizedLogin = {authorizedLogin}/> : <Navigate to="/login" />} />
-          
-          <Route exact path="/logoutSuccess" element={<LogoutSuccess setAuthorizedLogin={setAuthorizedLogin}/>}/>
+          <Route
+            exact
+            path="/applyLoan"
+            element={
+              isUserLoggedIn() ? (
+                <ApplyLoan authorizedLogin={authorizedLogin} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/viewLoans"
+            element={
+              isUserLoggedIn() ? (
+                <ViewLoans authorizedLogin={authorizedLogin} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/itemsPurchased"
+            element={
+              isUserLoggedIn() ? (
+                <ItemsPurchased authorizedLogin={authorizedLogin} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+
+          <Route
+            exact
+            path="/logoutSuccess"
+            element={<LogoutSuccess setAuthorizedLogin={setAuthorizedLogin} />}
+          />
           <Route exact path="/" element={<Home />} />
         </Routes>
       </div>

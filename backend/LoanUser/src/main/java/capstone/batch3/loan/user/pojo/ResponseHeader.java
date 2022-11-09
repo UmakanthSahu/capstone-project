@@ -3,6 +3,10 @@ package capstone.batch3.loan.user.pojo;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
+/*
+ * Response Headers for Rest Responses
+ */
+
 public class ResponseHeader {
 	MultiValueMap<String, String> headers = new HttpHeaders();
 
